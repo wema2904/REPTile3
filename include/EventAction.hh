@@ -29,6 +29,7 @@ class EventAction : public G4UserEventAction
     G4double PartEnergy;
     G4float PartTheta;
     G4ThreeVector PartPos;
+    G4ThreeVector PartVelDir;
   private:
     G4int SiSensID[8];
     G4int backSensID[7];        

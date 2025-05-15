@@ -46,7 +46,8 @@ void RunAction::BeginOfRunAction(const G4Run* aRun)
   analysisManager->CreateNtupleDColumn("D3G");
   analysisManager->CreateNtupleDColumn("D4");
   analysisManager->CreateNtupleDColumn("D4G");
-  analysisManager->CreateNtupleDColumn("Theta"); //Particle origin angle from z axis
+  // analysisManager->CreateNtupleDColumn("Theta"); //Particle origin angle from z axis
+  analysisManager->CreateNtupleDColumn("Particle Velocity Theta"); //Particle initial velocity angle from z axis
   analysisManager->FinishNtuple();
   analysisManager->OpenFile();
 }

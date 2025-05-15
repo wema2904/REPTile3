@@ -84,7 +84,9 @@ G4String EventAction::BeName = "BeFrontDisc";
   G4GeneralParticleSource* fGPS = generatorAction->fParticleGun;
   PartEnergy = fGPS->GetParticleEnergy();
   PartPos = fGPS->GetParticlePosition();
-  PartTheta = CLHEP::pi-float(acos(PartPos.z()/(pow((pow(PartPos.x(),2)+pow(PartPos.y(),2)+pow(PartPos.z(),2)),0.5))));
+  PartVelDir = fGPS->GetParticleMomentumDirection();
+  // PartTheta = CLHEP::pi-float(acos(PartPos.z()/(pow((pow(PartPos.x(),2)+pow(PartPos.y(),2)+pow(PartPos.z(),2)),0.5)))); // angle of inital position with detector axis
+  PartTheta = float(acos(PartVelDir.z())); // angle of inital velocity with detector axis
  //    BeDiscID = G4SDManager::GetSDMpointer()->GetCollectionID(BeName+collNm2);	 
      resetArrays();
   }

@@ -5,13 +5,14 @@
 /process/activate eBrem
 
 /control/alias numberofEvent 1000000 # will be put in the run
+#/control/alias numberofEvent 500000 # for electrons, try half as many and double the submitted jobs
 
 ### Particle Types####
 /gps/verbose 0
 
-#/gps/particle proton
+/gps/particle proton
 #/gps/particle e-
-/gps/particle alpha
+#/gps/particle alpha
 /gps/pos/centre 0 0 0 mm
 /gps/pos/type Surface
 /gps/pos/shape Sphere
@@ -19,7 +20,7 @@
 /gps/ang/type cos
 /gps/ang/mintheta 0 deg
 /gps/ang/maxtheta 90 deg
-/gps/pos/confine physical_constvol # comment this line out for full sphere. Uncomment for partial sphere
+#/gps/pos/confine physical_constvol # comment this line out for full sphere. Uncomment for partial sphere
 
 /gps/ene/type Lin
 /gps/ene/min 0 MeV
