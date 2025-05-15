@@ -1,0 +1,30 @@
+cd /Applications/g4work/REPTILE10/
+
+#run ./GeantSetupScript
+source ./GeantSetupScript
+
+#clear out the used make files
+make clean
+
+#make new Geant4 stuff
+make
+
+#copy new Geant4 stuff into REPTILE10
+cp ~/Applications/g4work/bin/Darwin-g++/REPTILE07 /Applications/g4work/REPTILE10
+
+#delete existing data in output.txt and test.txt
+if [ -a output.txt ]
+then
+rm output.txt
+fi
+
+if [ -a test.txt ] 
+then
+rm test.txt
+fi
+
+#run Geant4 on new vis1 condition
+./REPTILE07 vis1.mac > output.txt
+
+#look at results using HepRApp
+java -jar -mx1000M HepRApp.jar -file G4Data1.heprep

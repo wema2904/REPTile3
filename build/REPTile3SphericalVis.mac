@@ -1,0 +1,94 @@
+/control/verbose 0
+/run/initialize
+/process/activate msc
+/process/activate CoulombScat
+/process/activate eBrem
+
+/control/alias numberofEvent 1000 # will be put in the run beam
+
+### Particle Types####
+/gps/verbose 0
+
+/gps/particle proton
+#/gps/particle e-
+#/gps/particle alpha
+/gps/pos/centre 0 0 0 mm
+/gps/pos/type Surface
+/gps/pos/shape Sphere
+/gps/pos/radius 70 mm
+/gps/ang/type cos
+/gps/ang/mintheta 0 deg
+/gps/ang/maxtheta 90 deg
+#/gps/pos/confine physical_constvol # comment this line out for full sphere. Uncomment for partial sphere
+
+/gps/ene/type Lin
+/gps/ene/min 0 MeV
+/gps/ene/max 200 MeV
+/gps/ene/gradient 0
+/gps/ene/intercept 1
+
+/run/printProgress 1
+
+###############################################################
+# Below is what used to create the visualization (Heprep files)
+###############################################################
+#——————————————————————————
+# 1. write heprep
+#——————————————————————————
+/vis/open VRML2FILE
+
+#——————————————————————————
+# Create a new empty scene
+#——————————————————————————
+/vis/scene/create
+
+#——————————————————————————————————————————————————————————————————————————————
+# Declare that the world volume should be added to the scene
+#——————————————————————————————————————————————————————————————————————————————
+/vis/scene/add/volume
+
+#——————————————————————————
+# Attach scene to scenehandler
+#——————————————————————————
+/vis/sceneHandler/attach
+
+#——————————————————————————————————————————————————————————————————————————————
+# Draw a picture that has just the detector (no trajectories or hits).
+#——————————————————————————————————————————————————————————————————————————————
+/vis/viewer/flush
+
+#——————————————————————————————————————————————————————————————————————————————
+# Declare that trajectories and hits should be added to the scene
+#——————————————————————————————————————————————————————————————————————————————
+/vis/scene/add/hits
+
+/vis/scene/add/trajectories smooth
+/vis/modeling/trajectories/create/drawByCharge
+/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set e- blue
+/vis/modeling/trajectories/drawByParticleID-0/set gamma green
+/vis/modeling/trajectories/drawByParticleID-0/set proton red
+#————————————————————————————————————————————————————
+# Store particle trajectories for visualization
+#————————————————————————————————————————————————————
+/tracking/storeTrajectory 1
+/tracking/verbose 0
+/vis/scene/endOfEventAction accumulate
+#——————————————————————————————
+# Number of event for this run
+#——————————————————————————————
+/run/beamOn {numberofEvent}
+
+#——————————————————————————————————————————————————————————————————————————————
+#the txt files are the output files we write in the C++ source files (eventAction)
+# this command is to change the output files name with the different name with counter variables
+# Rename and move to the designated folder
+#——————————————————————————————————————————————————————————————————————————————
+#/control/shell mv REPTile2Boresight_nt_REPTile2.csv REPTile2Spherical.csv  
+
+#/vis/scene/add/trajectories/control/shell mv GPS__ElectonIncident__Ran0-2MeV.txt 
+
+exit
+
