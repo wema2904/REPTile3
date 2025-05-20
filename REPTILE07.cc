@@ -28,7 +28,15 @@ int main(int argc,char** argv)
 	//choose the Random engine
 	CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine());
 	//set random seed with system time
-	G4long seed = time(NULL);
+	G4long seed;
+	if (argc > 2) {
+	    long randomseed = std::stol(argv[2]);
+	    seed = randomseed;
+	    G4cout << " Seed set by input argument to: " << std::to_string(seed) << G4endl;
+	} else { 
+	    seed = time(NULL);
+	    G4cout << " Seed set by system time to: " << std::to_string(seed) << G4endl;
+	}
 	CLHEP::HepRandom::setTheSeed(seed);
 
 	// Construct the default run manager
