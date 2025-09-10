@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/REPTile3.dir/REPTILE07.cc.o"
-  "CMakeFiles/REPTile3.dir/REPTILE07.cc.o.d"
+  "CMakeFiles/REPTile3.dir/REPTile3.cc.o"
+  "CMakeFiles/REPTile3.dir/REPTile3.cc.o.d"
   "CMakeFiles/REPTile3.dir/src/DetectorConstruction.cc.o"
   "CMakeFiles/REPTile3.dir/src/DetectorConstruction.cc.o.d"
   "CMakeFiles/REPTile3.dir/src/DetectorMessenger.cc.o"

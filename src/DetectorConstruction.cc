@@ -68,36 +68,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   
 	// Beryllium
 	G4Material* Be = new G4Material("Beryllium",z= 4., a= 9.0122*g/mole, density= 1.848*g/cm3);
-
-        //from 3M Scotch Weld Epoxy Adhesive EC-2216 B/A Translucent
-        //Epoxy (for FR4 )
-        // Use NIST database for elements and materials whereever possible.
-	G4NistManager* man = G4NistManager::Instance();
-	G4Element* elC  = man->FindOrBuildElement("C");
-    G4Element* elH  = man->FindOrBuildElement("H");
-    G4Element* elO  = man->FindOrBuildElement("O");
-    G4Element* elN  = man->FindOrBuildElement("N");
-    
-    G4Material *EpoxyBase = new G4Material("EpoxyBase",  density = 1.17*g/cm3, ncomponents=3);
-    EpoxyBase->AddElement(elH, 21); // Hydrogen
-    EpoxyBase->AddElement(elO,  3); // Oxygen
-    EpoxyBase->AddElement(elC, 28); // Carbon
-    
-    G4Material *EpoxyAccelerator = new G4Material("EpoxyAccelerator",  density = 0.97*g/cm3, ncomponents=4);
-    EpoxyAccelerator->AddElement(elH, 24); // Hydrogen
-    EpoxyAccelerator->AddElement(elN,  2); // Nitrogen
-    EpoxyAccelerator->AddElement(elO,  3); // Oxygen
-    EpoxyAccelerator->AddElement(elC, 10); // Carbon
-    
-    //Density reference: https://www.globalspec.com/industrial-directory/density_epoxy_adhesives
-    G4Material *Epoxy = new G4Material("Epoxy",  density = 1.31*g/cm3, ncomponents=2);
-    Epoxy->AddMaterial(EpoxyBase, 50*perCent);
-    Epoxy->AddMaterial(EpoxyAccelerator,  50*perCent);
-    
-    //Density reference: https://www.sciencedirect.com/science/article/pii/S0168583X15004437
-    G4Material *EpoxyTungsten = new G4Material("EpoxyW",  density =  11*g/cm3, ncomponents=2);
-    EpoxyTungsten->AddMaterial(Epoxy, 36*perCent);
-    EpoxyTungsten->AddMaterial(W,  64*perCent);
         
 	// Near Vacuum
 	G4double atomicNumber = 1.;
@@ -152,29 +122,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     logic_coll_t1 = new G4LogicalVolume(solid_coll_t1,Ta,"coll_t1",0,0,0);
     physi_coll_t1 = new G4PVPlacement(rm,G4ThreeVector(coll_t1_x,coll_t1_y,coll_t1_z),
                        logic_coll_t1,"coll_t1",logic_w,false,0);
-    /*
-    // Tooth 2
-	G4double coll_t2_x=-17*mm; // x location
-	G4double coll_t2_y=-17*mm; // y location
-	G4double coll_t2_z=-10.0*mm; // z location
-	auto mesh_coll_t2 = CADMesh::TessellatedMesh::FromOBJ("./REPTile2c_TaTooth.obj");
-    G4VSolid* solid_coll_t2 = mesh_coll_t2->GetSolid();
-    solid_coll_t2 ->SetName("solid_coll_t2");
-    logic_coll_t2 = new G4LogicalVolume(solid_coll_t2,Ta,"coll_t2",0,0,0);
-    physi_coll_t2 = new G4PVPlacement(rm,G4ThreeVector(coll_t2_x,coll_t2_y,coll_t2_z),
-                       logic_coll_t2,"coll_t2",logic_w,false,0);
-   
-    // Tooth 3
-	G4double coll_t3_x=-17*mm; // x location
-	G4double coll_t3_y=-17*mm; // y location
-	G4double coll_t3_z=-3.06*mm; // z location
-	auto mesh_coll_t3 = CADMesh::TessellatedMesh::FromOBJ("./REPTile2c_TaTooth.obj");
-    G4VSolid* solid_coll_t3 = mesh_coll_t3->GetSolid();
-    solid_coll_t3 ->SetName("solid_coll_t2");
-    logic_coll_t3 = new G4LogicalVolume(solid_coll_t3,Ta,"coll_t3",0,0,0);
-    physi_coll_t3 = new G4PVPlacement(rm,G4ThreeVector(coll_t3_x,coll_t3_y,coll_t3_z),
-                       logic_coll_t3,"coll_t3",logic_w,false,0);
-    */
+
     // Teeth 2 and 3 updated REPTile3 Models     
    	// Tooth 2
 	G4double coll_t2_x=-17*mm; // x location
@@ -278,17 +226,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
     
     G4cout << "----> Total Thickness tungsten font annulus " << w_ann_d1+w_ann_d2 << G4endl;
-	
-//    // Alminum Shim Front // For imported items: the x, y are not started from (0,0) but the edge is (0,0). So, need to figure out the center
-//    auto mesh_alShimFront = CADMesh::TessellatedMesh::FromOBJ("./REPTile2c_AlShimFront.obj");
-//    G4VSolid* solid_alShimFront = mesh_alShimFront->GetSolid();
-//    solid_alShimFront ->SetName("solid_alShimFront");
-//    G4double x_alShimFront= -29.1*mm;
-//    G4double y_alShimFront= -25.5 *mm;
-//    G4double z_alShimFront= frontcoll_d+coll_d+al_ann1_d+w_ann_d;
-//    logic_alShimFront = new G4LogicalVolume(solid_alShimFront, Al,"logical_alShimFront", 0, 0, 0);
-//    physi_alShimFront = new G4PVPlacement( 0, G4ThreeVector(x_alShimFront, y_alShimFront, z_alShimFront), logic_alShimFront, "physical_alShimFront", logic_w, false,0);
-    
+
 	// tungsten chamber
 	G4double w_chm_d= 19.0*mm; // depth
 	G4double w_chm_hd=0.5*w_chm_d*mm; // half depth
@@ -304,16 +242,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     physi_w_chm = new G4PVPlacement(0,G4ThreeVector(w_chm_x,w_chm_y,w_chm_z),logic_w_chm,"W_chamber",logic_w,false,0);
     
     //G4cout << "----> Total chamber location " << frontcoll_d+coll_d+al_ann1_d+w_ann_d1+w_ann_d2+w_chm_hd << G4endl;
-
-//    // Aluminum Shim Back
-//    auto mesh_alShimBack = CADMesh::TessellatedMesh::FromOBJ("./REPTile2c_AlShimBack.obj");
-//    G4VSolid* solid_alShimBack = mesh_alShimBack->GetSolid();
-//    solid_alShimBack ->SetName("solid_alShimBack");
-//    G4double x_alShimBack= -29.175*mm;
-//    G4double y_alShimBack= -25.4*mm;
-//    G4double z_alShimBack= frontcoll_d+coll_d+al_ann1_d+w_ann_d+w_chm_d;
-//    logic_alShimBack = new G4LogicalVolume(solid_alShimBack, Al,"logical_alShimBack", 0, 0, 0);
-//    physi_alShimBack = new G4PVPlacement( 0, G4ThreeVector(x_alShimBack, y_alShimBack, z_alShimBack), logic_alShimBack, "physical_alShimBack", logic_w, false,0);
 
 	// Tungsten rear shielding, inset
     G4double w_fendenh_d=2.0*mm; // depth
