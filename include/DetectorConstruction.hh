@@ -107,6 +107,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
         G4LogicalVolume* logic_fastener2;
         G4LogicalVolume* logic_fastener3;
 		G4LogicalVolume* logic_constvol;
+		G4LogicalVolume* logic_alChamWin;
+		G4LogicalVolume* logic_wedge;
         // Physical volumes
         G4VPhysicalVolume* physi_w;
         G4VPhysicalVolume* physi_alMain;
@@ -175,6 +177,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
         G4VPhysicalVolume* physi_fastener2;
         G4VPhysicalVolume* physi_fastener3;
 		G4VPhysicalVolume* physi_constvol;
+		G4VPhysicalVolume* physi_alChamWin;
+		G4VPhysicalVolume* physi_wedge;
     
         // Visible attributes
         G4VisAttributes* VisAtt_w;
@@ -249,7 +253,9 @@ class DetectorConstruction : public G4VUserDetectorConstruction
         G4VisAttributes* VisAtt_fastener1;
         G4VisAttributes* VisAtt_fastener2;
         G4VisAttributes* VisAtt_fastener3;
-		G4VisAttributes* VisAtt_constvol;
+		//G4VisAttributes* VisAtt_constvol;
+		G4VisAttributes* VisAtt_alChamWin;
+		G4VisAttributes* VisAtt_wedge;
 		
         G4SDManager* sdManager;
 public:	 

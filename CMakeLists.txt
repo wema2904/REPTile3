@@ -35,19 +35,8 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(REPTile3 REPTILE07.cc ${sources} ${headers})
+add_executable(REPTile3 REPTile3.cc ${sources} ${headers})
 target_link_libraries(REPTile3 ${Geant4_LIBRARIES})
-
-#----------------------------------------------------------------------------
-# Copy all scripts to the build directory, i.e. the directory in which we
-# build B1. This is so that we can run the executable directly because it
-# relies on these scripts being in the current working directory.
-#
-set(EXAMPLEB1_SCRIPTS
-  VisualizeVis1REPTile
-  GeantSetupScript
-  vis1.mac
-  )
 
 foreach(_script ${EXAMPLEB1_SCRIPTS})
   configure_file(
@@ -57,15 +46,5 @@ foreach(_script ${EXAMPLEB1_SCRIPTS})
     )
 endforeach()
 
-#----------------------------------------------------------------------------
-# For internal Geant4 use - but has no effect if you build this
-# example standalone
-#
-add_custom_target(B1 DEPENDS exampleB1)
-
-#----------------------------------------------------------------------------
-# Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
-#
-install(TARGETS REPTile3 DESTINATION bin)
 
 

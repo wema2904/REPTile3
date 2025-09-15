@@ -1,11 +1,8 @@
-CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
- /home/declan/Geant/Geant/REPTile3/src/RunAction.cc \
- /usr/include/stdc-predef.h \
- /home/declan/Geant/Geant/REPTile3/include/RunAction.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UserRunAction.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Types.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4GlobalConfig.hh \
- /usr/include/c++/13/complex \
+CMakeFiles/REPTile3.dir/REPTile3.cc.o: \
+ /home/declan/Geant/Geant/REPTile3/REPTile3.cc /usr/include/stdc-predef.h \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4RunManager.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Event.hh \
+ /usr/include/c++/13/set /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -17,9 +14,51 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
  /usr/include/c++/13/pstl/pstl_config.h \
+ /usr/include/c++/13/bits/stl_tree.h \
+ /usr/include/c++/13/bits/stl_algobase.h \
+ /usr/include/c++/13/bits/functexcept.h \
+ /usr/include/c++/13/bits/exception_defines.h \
  /usr/include/c++/13/bits/cpp_type_traits.h \
- /usr/include/c++/13/ext/type_traits.h /usr/include/c++/13/cmath \
- /usr/include/c++/13/bits/requires_hosted.h /usr/include/math.h \
+ /usr/include/c++/13/ext/type_traits.h \
+ /usr/include/c++/13/ext/numeric_traits.h \
+ /usr/include/c++/13/bits/stl_pair.h /usr/include/c++/13/type_traits \
+ /usr/include/c++/13/bits/move.h /usr/include/c++/13/bits/utility.h \
+ /usr/include/c++/13/bits/stl_iterator_base_types.h \
+ /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
+ /usr/include/c++/13/bits/concept_check.h \
+ /usr/include/c++/13/debug/assertions.h \
+ /usr/include/c++/13/bits/stl_iterator.h \
+ /usr/include/c++/13/bits/ptr_traits.h /usr/include/c++/13/debug/debug.h \
+ /usr/include/c++/13/bits/predefined_ops.h /usr/include/c++/13/bit \
+ /usr/include/c++/13/bits/allocator.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
+ /usr/include/c++/13/bits/new_allocator.h /usr/include/c++/13/new \
+ /usr/include/c++/13/bits/exception.h \
+ /usr/include/c++/13/bits/memoryfwd.h \
+ /usr/include/c++/13/bits/stl_function.h \
+ /usr/include/c++/13/backward/binders.h \
+ /usr/include/c++/13/ext/alloc_traits.h \
+ /usr/include/c++/13/bits/alloc_traits.h \
+ /usr/include/c++/13/bits/stl_construct.h \
+ /usr/include/c++/13/ext/aligned_buffer.h \
+ /usr/include/c++/13/bits/node_handle.h \
+ /usr/include/c++/13/bits/stl_set.h /usr/include/c++/13/initializer_list \
+ /usr/include/c++/13/bits/stl_multiset.h \
+ /usr/include/c++/13/bits/range_access.h \
+ /usr/include/c++/13/bits/erase_if.h \
+ /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+ /usr/include/c++/13/bits/uses_allocator.h \
+ /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/tuple \
+ /usr/include/c++/13/bits/invoke.h /usr/include/c++/13/map \
+ /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/globals.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ios.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Types.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4GlobalConfig.hh \
+ /usr/include/c++/13/complex /usr/include/c++/13/cmath \
+ /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
@@ -36,7 +75,6 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
  /usr/include/c++/13/bits/std_abs.h /usr/include/stdlib.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
@@ -64,21 +102,8 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/c++/13/bits/specfun.h \
- /usr/include/c++/13/bits/stl_algobase.h \
- /usr/include/c++/13/bits/functexcept.h \
- /usr/include/c++/13/bits/exception_defines.h \
- /usr/include/c++/13/ext/numeric_traits.h \
- /usr/include/c++/13/bits/stl_pair.h /usr/include/c++/13/type_traits \
- /usr/include/c++/13/bits/move.h /usr/include/c++/13/bits/utility.h \
- /usr/include/c++/13/bits/stl_iterator_base_types.h \
- /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
- /usr/include/c++/13/bits/concept_check.h \
- /usr/include/c++/13/debug/assertions.h \
- /usr/include/c++/13/bits/stl_iterator.h \
- /usr/include/c++/13/bits/ptr_traits.h /usr/include/c++/13/debug/debug.h \
- /usr/include/c++/13/bits/predefined_ops.h /usr/include/c++/13/bit \
- /usr/include/c++/13/limits /usr/include/c++/13/tr1/gamma.tcc \
+ /usr/include/c++/13/bits/specfun.h /usr/include/c++/13/limits \
+ /usr/include/c++/13/tr1/gamma.tcc \
  /usr/include/c++/13/tr1/special_function_util.h \
  /usr/include/c++/13/tr1/bessel_function.tcc \
  /usr/include/c++/13/tr1/beta_function.tcc \
@@ -92,20 +117,18 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /usr/include/c++/13/tr1/riemann_zeta.tcc /usr/include/c++/13/sstream \
  /usr/include/c++/13/istream /usr/include/c++/13/ios \
  /usr/include/c++/13/iosfwd /usr/include/c++/13/bits/stringfwd.h \
- /usr/include/c++/13/bits/memoryfwd.h /usr/include/c++/13/bits/postypes.h \
- /usr/include/c++/13/cwchar /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+ /usr/include/c++/13/bits/postypes.h /usr/include/c++/13/cwchar \
+ /usr/include/wchar.h /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/c++/13/exception /usr/include/c++/13/bits/exception.h \
- /usr/include/c++/13/bits/exception_ptr.h \
+ /usr/include/c++/13/exception /usr/include/c++/13/bits/exception_ptr.h \
  /usr/include/c++/13/bits/cxxabi_init_exception.h \
  /usr/include/c++/13/typeinfo /usr/include/c++/13/bits/hash_bytes.h \
- /usr/include/c++/13/new /usr/include/c++/13/bits/nested_exception.h \
+ /usr/include/c++/13/bits/nested_exception.h \
  /usr/include/c++/13/bits/char_traits.h \
  /usr/include/c++/13/bits/localefwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
@@ -129,20 +152,10 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
  /usr/include/c++/13/bits/locale_classes.h /usr/include/c++/13/string \
- /usr/include/c++/13/bits/allocator.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
- /usr/include/c++/13/bits/new_allocator.h \
  /usr/include/c++/13/bits/ostream_insert.h \
  /usr/include/c++/13/bits/cxxabi_forced.h \
- /usr/include/c++/13/bits/stl_function.h \
- /usr/include/c++/13/backward/binders.h \
- /usr/include/c++/13/bits/refwrap.h /usr/include/c++/13/bits/invoke.h \
- /usr/include/c++/13/bits/range_access.h \
- /usr/include/c++/13/initializer_list \
- /usr/include/c++/13/bits/basic_string.h \
- /usr/include/c++/13/ext/alloc_traits.h \
- /usr/include/c++/13/bits/alloc_traits.h \
- /usr/include/c++/13/bits/stl_construct.h /usr/include/c++/13/string_view \
+ /usr/include/c++/13/bits/refwrap.h \
+ /usr/include/c++/13/bits/basic_string.h /usr/include/c++/13/string_view \
  /usr/include/c++/13/bits/functional_hash.h \
  /usr/include/c++/13/bits/string_view.tcc \
  /usr/include/c++/13/ext/string_conversions.h /usr/include/c++/13/cstdlib \
@@ -159,9 +172,6 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
- /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
- /usr/include/c++/13/bits/uses_allocator.h \
- /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/tuple \
  /usr/include/c++/13/bits/locale_classes.tcc \
  /usr/include/c++/13/system_error \
  /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
@@ -179,8 +189,6 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /usr/include/c++/13/bits/istream.tcc \
  /usr/include/c++/13/bits/sstream.tcc \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/tls.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/globals.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ios.hh \
  /usr/include/c++/13/iostream /usr/include/c++/13/algorithm \
  /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
@@ -212,13 +220,7 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
  /usr/include/c++/13/bits/locale_facets_nonio.tcc \
  /usr/include/c++/13/bits/locale_conv.h \
- /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/map \
- /usr/include/c++/13/bits/stl_tree.h \
- /usr/include/c++/13/ext/aligned_buffer.h \
- /usr/include/c++/13/bits/node_handle.h \
- /usr/include/c++/13/bits/stl_map.h \
- /usr/include/c++/13/bits/stl_multimap.h \
- /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/mutex \
+ /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/mutex \
  /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
  /usr/include/c++/13/cstdint \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
@@ -227,30 +229,6 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /usr/include/c++/13/bits/parse_numbers.h \
  /usr/include/c++/13/bits/std_mutex.h \
  /usr/include/c++/13/bits/unique_lock.h \
- /home/declan/Geant/Geant/REPTile3/include/RunAction.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Run.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Profiler.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Profiler.icc \
- /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
- /usr/include/c++/13/unordered_map \
- /usr/include/c++/13/bits/unordered_map.h \
- /usr/include/c++/13/bits/hashtable.h \
- /usr/include/c++/13/bits/hashtable_policy.h \
- /usr/include/c++/13/bits/enable_special_members.h \
- /usr/include/c++/13/vector /usr/include/c++/13/bits/stl_uninitialized.h \
- /usr/include/c++/13/bits/stl_vector.h \
- /usr/include/c++/13/bits/stl_bvector.h \
- /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/array \
- /usr/include/c++/13/compare \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/PTL/Globals.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/PTL/Types.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/PTL/Utility.hh \
- /usr/include/c++/13/set /usr/include/c++/13/bits/stl_set.h \
- /usr/include/c++/13/bits/stl_multiset.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/globals.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4RunManager.hh \
- /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Event.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/evtdefs.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Allocator.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4AllocatorPool.hh \
@@ -263,11 +241,28 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/pwdefs.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4HCofThisEvent.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VHitsCollection.hh \
+ /usr/include/c++/13/vector /usr/include/c++/13/bits/stl_uninitialized.h \
+ /usr/include/c++/13/bits/stl_vector.h \
+ /usr/include/c++/13/bits/stl_bvector.h \
+ /usr/include/c++/13/bits/vector.tcc \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4DCofThisEvent.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VDigiCollection.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4TrajectoryContainer.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VTrajectory.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VUserEventInformation.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Profiler.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Profiler.icc \
+ /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
+ /usr/include/c++/13/unordered_map \
+ /usr/include/c++/13/bits/unordered_map.h \
+ /usr/include/c++/13/bits/hashtable.h \
+ /usr/include/c++/13/bits/hashtable_policy.h \
+ /usr/include/c++/13/bits/enable_special_members.h \
+ /usr/include/c++/13/array /usr/include/c++/13/compare \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/PTL/Globals.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/PTL/Types.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/PTL/Utility.hh \
+ /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4EventManager.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4StackManager.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UserStackingAction.hh \
@@ -502,6 +497,224 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/rundefs.hh \
  /usr/include/c++/13/list /usr/include/c++/13/bits/stl_list.h \
  /usr/include/c++/13/bits/list.tcc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UImanager.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UIcommandStatus.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VStateDependent.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/icomsdefs.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UIterminal.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UImanager.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VBasicShell.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UIsession.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4coutDestination.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VUIshell.hh \
+ /home/declan/Geant/Geant/REPTile3/include/DetectorConstruction.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SDManager.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4HCtable.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SDStructure.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VSensitiveDetector.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4CollectionNameVector.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VHit.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VReadOutGeometry.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SensitiveVolumeList.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VSDFilter.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VSensitiveDetector.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VUserDetectorConstruction.hh \
+ /home/declan/Geant/Geant/REPTile3/include/DetectorMessenger.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/globals.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UImessenger.hh \
+ /home/declan/Geant/Geant/REPTile3/include/DetectorConstruction.hh \
+ /home/declan/Geant/Geant/REPTile3/include/DetectorMessenger.hh \
+ /home/declan/Geant/Geant/REPTile3/include/PhysicsList.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VUserPhysicsList.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ProductionCutsTable.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4MaterialCutsCouple.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ProductionCuts.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4MCCIndexConversionTable.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VUPLSplitter.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VModularPhysicsList.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VPhysicsConstructor.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4PhysicsListHelper.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4PhysicsListOrderingParameter.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ThreadLocalSingleton.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Cache.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4CacheDetails.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Backtrace.hh \
+ /usr/include/c++/13/cxxabi.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cxxabi_tweaks.h \
+ /usr/include/execinfo.h /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h /usr/include/c++/13/cfenv \
+ /usr/include/c++/13/fenv.h /usr/include/fenv.h \
+ /usr/include/x86_64-linux-gnu/bits/fenv.h /usr/include/c++/13/csignal \
+ /usr/include/signal.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+ /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+ /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+ /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+ /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstksz.h \
+ /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+ /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+ /usr/include/c++/13/regex /usr/include/c++/13/bitset \
+ /usr/include/c++/13/stack /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_stack.h \
+ /usr/include/c++/13/bits/regex_constants.h \
+ /usr/include/c++/13/bits/regex_error.h \
+ /usr/include/c++/13/bits/regex_automaton.h \
+ /usr/include/c++/13/bits/regex_automaton.tcc \
+ /usr/include/c++/13/bits/regex_scanner.h \
+ /usr/include/c++/13/bits/regex_scanner.tcc \
+ /usr/include/c++/13/bits/regex_compiler.h \
+ /usr/include/c++/13/bits/regex_compiler.tcc \
+ /usr/include/c++/13/bits/regex.h /usr/include/c++/13/bits/regex.tcc \
+ /usr/include/c++/13/bits/regex_executor.h \
+ /usr/include/c++/13/bits/regex_executor.tcc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VUserPhysicsList.hh \
+ /home/declan/Geant/Geant/REPTile3/include/PrimaryGeneratorAction.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4GeneralParticleSource.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SingleParticleSource.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VPrimaryGenerator.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SPSPosDistribution.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SPSRandomGenerator.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4DataInterpolation.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SPSAngDistribution.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SPSEneDistribution.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4GeneralParticleSourceMessenger.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4GeneralParticleSourceData.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VisExecutive.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VisManager.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VVisManager.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4GraphicsSystemList.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VGraphicsSystem.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ModelingParameters.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VisExtent.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Point3D.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VisAttributes.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/graphics_reps_defs.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Colour.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Color.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VisAttributes.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ModelingParameters.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4NullModel.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VModel.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VModel.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SceneHandlerList.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VSceneHandler.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VGraphicsScene.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ViewerList.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VViewer.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SceneTreeItem.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4AttDef.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4TypeKey.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4AttValue.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ViewParameters.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Vector3D.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Plane3D.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/CLHEP/Geometry/Plane3D.h \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VMarker.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Visible.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Visible.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VMarker.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ViewParameters.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4PhysicalVolumeModel.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4PseudoScene.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Box.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4GeomTypes.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4GeomConfig.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4CSGSolid.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Polyhedron.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/HepPolyhedron.h \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4TwoVector.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/CLHEP/Vector/TwoVector.h \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/CLHEP/Vector/TwoVector.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Normal3D.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Box.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Cons.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Cons.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Orb.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Orb.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Para.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Para.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Sphere.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Sphere.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Torus.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Torus.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Trap.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Trap.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Trd.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Trd.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Tubs.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Tubs.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Ellipsoid.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Ellipsoid.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Polycone.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VCSGfaceted.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4PolyconeSide.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VCSGface.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4PolyconeHistorical.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Polycone.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Polyhedra.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4PolyhedraSide.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4PolyhedraHistorical.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Polyhedra.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4TessellatedSolid.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Voxelizer.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SurfBits.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VFacet.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/windefs.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Voxelizer.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VViewer.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4THitsMap.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4THitsCollection.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VSceneHandler.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4SceneList.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Scene.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Scene.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4TrajectoriesModel.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VisManager.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VisExecutive.icc \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4HitFilterFactories.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VFilter.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VModelFactory.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4DigiFilterFactories.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VDigi.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4TrajectoryFilterFactories.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4TrajectoryModelFactories.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VTrajectoryModel.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ASCIITree.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VTree.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4DAWNFILE.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4HepRepFile.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4HepRepFileXMLWriter.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4RayTracer.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VRML2File.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4GMocrenFile.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ToolsSGOffscreen.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UIbatch.hh \
+ /home/declan/Geant/Geant/REPTile3/include/RunAction.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UserRunAction.hh \
+ /home/declan/Geant/Geant/REPTile3/include/RunAction.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Run.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UnitsTable.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UnitsTable.icc \
  /home/declan/Geant/Geant/REPTile3/include/HistoManager.hh \
@@ -583,4 +796,17 @@ CMakeFiles/REPTile3.dir/src/RunAction.cc.o: \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4TFileManager.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4TFileInformation.hh \
  /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4TFileManager.icc \
- /home/declan/Geant/Geant/REPTile3/include/HistoManager.hh
+ /home/declan/Geant/Geant/REPTile3/include/TrackingAction.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UserTrackingAction.hh \
+ /home/declan/Geant/Geant/REPTile3/include/EventAction.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UserEventAction.hh \
+ /home/declan/Geant/Geant/REPTile3/include/PrimaryGeneratorAction.hh \
+ /home/declan/Geant/Geant/REPTile3/include/StackingAction.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4UserStackingAction.hh \
+ /home/declan/Geant/Geant/REPTile3/include/SetSensDet.hh \
+ /home/declan/Geant/Geant/REPTile3/include/REPTILEhit.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4VHit.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4THitsCollection.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4Allocator.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/G4ThreeVector.hh \
+ /home/declan/Geant/Geant/geant4-v11.2.0-install/include/Geant4/Randomize.hh
