@@ -83,14 +83,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	windowMaterialAl = Al;
 	windowMaterial = windowMaterialBe;
 	
-        //Air?
-	//G4double atomicNumber = 7.;
-	//G4double massOfMole = 14*g/mole;
-	//G4double vac_density = 1.5e-3*g/cm3;
-	//G4double temperature = 296.*kelvin;
-	//G4double pressure = 101325.*pascal;
-	//G4Material* Vacuum = new G4Material("interGalactic", atomicNumber,massOfMole, vac_density, kStateGas,temperature, pressure);
-	
+	G4NistManager* man = G4NistManager::Instance();
+    G4Material* Air = man->FindOrBuildMaterial("G4_AIR");
 	//____________________ solids ____________________
 
 	// world volume (w)
@@ -98,7 +92,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	G4double w_hl = 0.5*w_fl; // half length
 	
 	G4Box* solid_w = new G4Box("world",w_hl,w_hl,w_hl);
-	logic_w = new G4LogicalVolume(solid_w,Vacuum,"world",0,0,0);
+	logic_w = new G4LogicalVolume(solid_w,Air,"world",0,0,0);
 	physi_w = new G4PVPlacement(0,G4ThreeVector(),logic_w,"world",0,false,0);
     
 		/* Aluminum window for TAMU beam test */
@@ -110,20 +104,68 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	G4double alChamWin_spa=360*deg; // span angle
 	G4double alChamWin_x=0.0*mm; // x location
 	G4double alChamWin_y=0.0*mm; // y locationcoll
-	G4double alChamWin_z=-50*mm; // z location
+	G4double alChamWin_z=-70*mm; // z location
 	G4Tubs* solid_alChamWin = new G4Tubs("AluminumChamberWindow",alChamWin_ir,alChamWin_or,alChamWin_hd,alChamWin_sta,alChamWin_spa);
     logic_alChamWin = new G4LogicalVolume(solid_alChamWin,Al,"AluminumChamberWindow",0,0,0);
     physi_alChamWin = new G4PVPlacement(0,G4ThreeVector(alChamWin_x,alChamWin_y,alChamWin_z),logic_alChamWin,"AluminumChamberWindow",logic_w,false,0);
 	
 	/* Test Aluminum Wedge for Beam Test */
 	auto mesh_wedge = CADMesh::TessellatedMesh::FromOBJ("./REPTile3_Wedge.obj");
+	mesh_wedge->SetScale(0.75);
+	mesh_wedge->SetOffset(-25.0*mm*0.75,-25.5*mm*0.75,0);
     G4VSolid* solid_wedge = mesh_wedge->GetSolid();
     solid_wedge ->SetName("solid_wedge");
-    G4double z_wedge= -30*mm;
+    G4double z_wedge= -43.5*mm;
     logic_wedge = new G4LogicalVolume(solid_wedge, Al,"logical_wedge", 0, 0, 0);
+    physi_wedge = new G4PVPlacement(0,G4ThreeVector(0,0,z_wedge),logic_wedge,"Test_Wedge",logic_w,false,0);
+	
+	/* Front detector head support bracket*/
+	auto mesh_alFrontBracket = CADMesh::TessellatedMesh::FromOBJ("./REPTile3_FrontSupportBracket.obj");
+	mesh_alFrontBracket->SetScale(1000.0);
+	mesh_alFrontBracket->SetOffset(-46.0*mm,-46.0*mm,0.0*mm);
+    G4VSolid* solid_alFrontBracket = mesh_alFrontBracket->GetSolid();
+    solid_alFrontBracket ->SetName("solid_alFrontBracket");
+    G4double z_alFrontBracket= -57.5*mm;
 	G4RotationMatrix* rm = new G4RotationMatrix();
-	rm->rotateX(-90.*deg);
-    physi_wedge = new G4PVPlacement(0,G4ThreeVector(-25.0*mm,-25.0*mm,z_wedge),logic_wedge,"Test_Wedge",logic_w,false,0);
+	rm->rotateZ(-180.*deg);
+    logic_alFrontBracket = new G4LogicalVolume(solid_alFrontBracket, Al,"logical_alFrontBracket", 0, 0, 0);
+    physi_alFrontBracket = new G4PVPlacement(rm,G4ThreeVector(0.0*mm,0.0*mm,z_alFrontBracket),logic_alFrontBracket,"Front Support Bracket",logic_w,false,0);
+	
+	/* Back detector head support bracket*/
+	auto mesh_alBackBracket = CADMesh::TessellatedMesh::FromOBJ("./REPTile3_RearSupportBracket.obj");
+	mesh_alBackBracket->SetScale(1000.0);
+	mesh_alBackBracket->SetOffset(-46.0*mm,-46.0*mm,0.0*mm);
+	G4VSolid* solid_alBackBracket = mesh_alBackBracket->GetSolid();
+    solid_alBackBracket ->SetName("solid_alBackBracket");
+    G4double z_alBackBracket= -29.5*mm;
+	rm = new G4RotationMatrix();
+	rm->rotateZ(-180.*deg);
+    logic_alBackBracket = new G4LogicalVolume(solid_alBackBracket, Al,"logical_alBackBracket", 0, 0, 0);
+    physi_alBackBracket = new G4PVPlacement(rm,G4ThreeVector(0.0*mm,0.0*mm,z_alBackBracket),logic_alBackBracket,"Back Support Bracket",logic_w,false,0);
+	
+	/* Aluminum instrument body*/
+	auto mesh_alBody = CADMesh::TessellatedMesh::FromOBJ("./REPTile3_AluminumBody.obj");
+	mesh_alBody->SetOffset(-62.5*mm,-65.5*mm,0);
+	mesh_alBody->SetScale(1000.0);
+    G4VSolid* solid_alBody = mesh_alBody->GetSolid();
+    solid_alBody ->SetName("solid_alBody");
+    G4double z_alBody= 120.0*mm;
+	rm = new G4RotationMatrix();
+	rm->rotateX(-180.*deg);
+    logic_alBody = new G4LogicalVolume(solid_alBody, Al,"logical_alBody", 0, 0, 0);
+    physi_alBody = new G4PVPlacement(rm,G4ThreeVector(0.0*mm,0.0*mm,z_alBody),logic_alBody,"Aluminum body",logic_w,false,0);
+	
+	/*RBF Cover*/
+	auto mesh_alRBF = CADMesh::TessellatedMesh::FromOBJ("./REPTile3_RBFCover.obj");
+	mesh_alRBF->SetScale(1000.0);
+	mesh_alRBF->SetOffset(-50*mm,0*mm,-50.0*mm);
+    G4VSolid* solid_alRBF = mesh_alRBF->GetSolid();
+    solid_alRBF ->SetName("solid_alBody");
+    G4double z_alRBF= -41*mm;
+	rm = new G4RotationMatrix();
+	rm->rotateX(90.*deg);
+    logic_alRBF = new G4LogicalVolume(solid_alRBF, Al,"logical_alRBF", 0, 0, 0);
+    physi_alRBF = new G4PVPlacement(rm,G4ThreeVector(0.0*mm,0.0*mm,z_alRBF),logic_alRBF,"Aluminum body",logic_w,false,0);
 	
     /* Aluminum Shell */
     auto mesh_alMain = CADMesh::TessellatedMesh::FromOBJ("./REPTile3AlShell.obj");
@@ -131,8 +173,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     solid_alMain ->SetName("solid_alMain");
     G4double z_alMain= -16.2*mm-1*mm;
     logic_alMain = new G4LogicalVolume(solid_alMain, Al,"logical_alMain", 0, 0, 0);
-	//G4RotationMatrix* rm = new G4RotationMatrix();
-	//rm->rotateX(-90.*deg);
+	rm = new G4RotationMatrix();
+	rm->rotateX(-90.*deg);
     physi_alMain = new G4PVPlacement( rm, G4ThreeVector(-38.7*mm, -38.7*mm, z_alMain), logic_alMain, "physical_alMain", logic_w, false,0);
 	
 	// Collimator 
@@ -431,16 +473,16 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     auto mesh_alCap = CADMesh::TessellatedMesh::FromOBJ("./REPTile2c_AlCap_1023.obj");
     G4VSolid* solid_alCap = mesh_alCap->GetSolid();
     solid_alCap ->SetName("solid_alCap");
-    G4double x_alCap= -38.7*mm;
+    G4double x_alCap= -41*mm;
     G4double y_alCap= -38.7*mm;
-    G4double z_alCap= -0.5*mm-1.26*mm+w_chm_d+w_end_d+w_endenh_d;
+    G4double z_alCap= -3.0*mm+w_chm_d+w_end_d+w_endenh_d;
     logic_alCap = new G4LogicalVolume(solid_alCap, Al,"logical_alCap", 0, 0, 0);
 	
     physi_alCap = new G4PVPlacement(0, G4ThreeVector(x_alCap, y_alCap, z_alCap), logic_alCap, "physical_alCap", logic_w, false,0);
 	
 	
 	// Constraint volume for spherical cap
-    /* G4double constvol_zl = 30*mm; // z length
+    G4double constvol_zl = 30*mm; // z length
     G4double constvol_hzl = 0.5*constvol_zl*mm; // half z length
     G4double constvol_xl = 70.0*mm; // x length
     G4double constvol_yl = 70.0*mm; // y length
@@ -450,12 +492,27 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4Box* solid_constvol = new G4Box("constvol",constvol_xl,constvol_yl,constvol_zl);
     logic_constvol = new G4LogicalVolume(solid_constvol,Vacuum,"logical_constvol",0,0,0);
     physi_constvol = new G4PVPlacement(0,G4ThreeVector(constvol_x,constvol_y,constvol_z),logic_constvol,"physical_constvol",logic_w,false,0);
-	 */
     G4cout << "----> Detector setup done " << G4endl;
     
 
 	//____________________ visible attributes ____________________
 
+	VisAtt_alFrontBracket = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
+    VisAtt_alFrontBracket->SetVisibility(true);
+    logic_alFrontBracket->SetVisAttributes(VisAtt_alFrontBracket);
+
+	VisAtt_alBackBracket = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
+    VisAtt_alBackBracket->SetVisibility(true);
+    logic_alBackBracket->SetVisAttributes(VisAtt_alBackBracket);
+	
+	VisAtt_alBody = new G4VisAttributes(G4Colour(0.0,1.0,0.0));
+    VisAtt_alBody->SetVisibility(true);
+    logic_alBody->SetVisAttributes(VisAtt_alFrontBracket);
+	
+	VisAtt_alRBF = new G4VisAttributes(G4Colour(1.0,0.0,0.0));
+    VisAtt_alRBF->SetVisibility(true);
+    logic_alRBF->SetVisAttributes(VisAtt_alRBF);
+	
 	VisAtt_w = new G4VisAttributes(G4Colour(0.0,0.0,0.0));
 	VisAtt_w->SetVisibility(true);
 	logic_w->SetVisAttributes(VisAtt_w);
@@ -468,79 +525,31 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     VisAtt_alCap->SetVisibility(true);
     logic_alCap->SetVisAttributes(VisAtt_alCap);
     
-//    VisAtt_alShimFront = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
-//    VisAtt_alShimFront->SetVisibility(true);
-//    logic_alShimFront->SetVisAttributes(VisAtt_alShimFront);
-//
-//    VisAtt_alShimBack = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
-//    VisAtt_alShimBack->SetVisibility(true);
-//    logic_alShimBack->SetVisAttributes(VisAtt_alShimBack);
-    
 //collimator and its teeth
-//    VisAtt_frontcoll = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
-//    VisAtt_frontcoll->SetVisibility(true);
-//    logic_frontcoll->SetVisAttributes(VisAtt_frontcoll);
-//
-//    VisAtt_coll = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
-//    VisAtt_coll->SetVisibility(true);
-//    logic_coll->SetVisAttributes(VisAtt_coll);
-    
-//    VisAtt_coll_embed = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //embeded heavy shielding
-//    VisAtt_coll_embed->SetVisibility(true);
-//    logic_coll_embed->SetVisAttributes(VisAtt_coll_embed);
- 
- /*   
-    VisAtt_coll = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
-    VisAtt_coll->SetVisibility(true);
-    logic_coll->SetVisAttributes(VisAtt_coll);
-   */ 
-    VisAtt_coll_t1 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
+
+    VisAtt_coll_t1 = new G4VisAttributes(G4Colour(0.0,1.0,1.0)); 
     VisAtt_coll_t1->SetVisibility(true);
     logic_coll_t1->SetVisAttributes(VisAtt_coll_t1);
     
-    VisAtt_coll_t2 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
+    VisAtt_coll_t2 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));
     VisAtt_coll_t2->SetVisibility(true);
     logic_coll_t2->SetVisAttributes(VisAtt_coll_t2);
     
-    VisAtt_coll_t3 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
+    VisAtt_coll_t3 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));
     VisAtt_coll_t3->SetVisibility(true);
     logic_coll_t3->SetVisAttributes(VisAtt_coll_t3);
     
-    VisAtt_coll_s1 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
+    VisAtt_coll_s1 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));
     VisAtt_coll_s1->SetVisibility(true);
     logic_coll_s1->SetVisAttributes(VisAtt_coll_s1);
     
-    VisAtt_coll_s2 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
+    VisAtt_coll_s2 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));
     VisAtt_coll_s2->SetVisibility(true);
     logic_coll_s2->SetVisAttributes(VisAtt_coll_s2);
-
-//    VisAtt_al_ann1 = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
-//    VisAtt_al_ann1->SetVisibility(true);
-//    logic_al_ann1->SetVisAttributes(VisAtt_al_ann1);
-//
-////    VisAtt_al_ann2 = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
-////    VisAtt_al_ann2->SetVisibility(true);
-////    logic_al_ann2->SetVisAttributes(VisAtt_al_ann2);
-//
-//    VisAtt_al_chm = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
-//    VisAtt_al_chm->SetVisibility(true);
-//    logic_al_chm->SetVisAttributes(VisAtt_al_chm);
-
-//    VisAtt_al_end = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
-//    VisAtt_al_end->SetVisibility(true);
-//    logic_al_end->SetVisAttributes(VisAtt_al_end);
-//
-//    VisAtt_al_endann = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
-//    VisAtt_al_endann->SetVisibility(true);
-//    logic_al_endann->SetVisAttributes(VisAtt_al_endann);
-
+	
     VisAtt_be = new G4VisAttributes(G4Colour(0.0,0.0,1.0));
     VisAtt_be->SetVisibility(true);
     logic_be->SetVisAttributes(VisAtt_be);
-	
-//    VisAtt_w_ann = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
-//    VisAtt_w_ann->SetVisibility(true);
-//    logic_w_ann->SetVisAttributes(VisAtt_w_ann);
 
     VisAtt_w_ann1 = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
     VisAtt_w_ann1->SetVisibility(true);
@@ -598,9 +607,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     VisAtt_d4Outer->SetVisibility(true);
     logic_d4outer->SetVisAttributes(VisAtt_d4Outer);
 	
-    //VisAtt_constvol = new G4VisAttributes(G4Colour(1.0,1.0,1.0));
-    //VisAtt_constvol->SetVisibility(true);
-    //logic_constvol->SetVisAttributes(VisAtt_constvol);
+    VisAtt_constvol = new G4VisAttributes(G4Colour(1.0,1.0,1.0));
+    VisAtt_constvol->SetVisibility(false);
+    logic_constvol->SetVisAttributes(VisAtt_constvol);
 	
 	VisAtt_wedge = new G4VisAttributes(G4Colour(1.0,1.0,1.0));
     VisAtt_wedge->SetVisibility(true);

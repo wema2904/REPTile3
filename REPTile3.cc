@@ -73,10 +73,9 @@ int main(int argc,char** argv)
 	//G4int numberOfEvent = 1;
 	//runManager->BeamOn(numberOfEvent);
 
-
 	auto visManager = new G4VisExecutive(argc, argv);
 	visManager->Initialize();
-
+	
   if(argc>1) // execute an argument macro file if exist
   {
     G4UImanager* UImanager = G4UImanager::GetUIpointer();

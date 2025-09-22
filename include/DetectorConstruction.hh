@@ -109,6 +109,11 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 		G4LogicalVolume* logic_constvol;
 		G4LogicalVolume* logic_alChamWin;
 		G4LogicalVolume* logic_wedge;
+		G4LogicalVolume* logic_alFrontBracket;
+		G4LogicalVolume* logic_alBackBracket;
+		G4LogicalVolume* logic_alBody;
+		G4LogicalVolume* logic_alRBF;
+		
         // Physical volumes
         G4VPhysicalVolume* physi_w;
         G4VPhysicalVolume* physi_alMain;
@@ -179,7 +184,11 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 		G4VPhysicalVolume* physi_constvol;
 		G4VPhysicalVolume* physi_alChamWin;
 		G4VPhysicalVolume* physi_wedge;
-    
+		G4VPhysicalVolume* physi_alFrontBracket;
+		G4VPhysicalVolume* physi_alBackBracket;
+		G4VPhysicalVolume* physi_alBody;
+		G4VPhysicalVolume* physi_alRBF;
+		
         // Visible attributes
         G4VisAttributes* VisAtt_w;
         G4VisAttributes* VisAtt_alMain;
@@ -253,10 +262,13 @@ class DetectorConstruction : public G4VUserDetectorConstruction
         G4VisAttributes* VisAtt_fastener1;
         G4VisAttributes* VisAtt_fastener2;
         G4VisAttributes* VisAtt_fastener3;
-		//G4VisAttributes* VisAtt_constvol;
+		G4VisAttributes* VisAtt_constvol;
 		G4VisAttributes* VisAtt_alChamWin;
 		G4VisAttributes* VisAtt_wedge;
-		
+		G4VisAttributes* VisAtt_alFrontBracket;
+		G4VisAttributes* VisAtt_alBackBracket;
+		G4VisAttributes* VisAtt_alBody;
+		G4VisAttributes* VisAtt_alRBF;
         G4SDManager* sdManager;
 public:	 
      G4VSensitiveDetector* SiSD[8]; 

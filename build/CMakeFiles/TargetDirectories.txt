@@ -1,3 +1,0 @@
-/home/declan/Geant/Geant/REPTile3/build/CMakeFiles/REPTile3.dir
-/home/declan/Geant/Geant/REPTile3/build/CMakeFiles/edit_cache.dir
-/home/declan/Geant/Geant/REPTile3/build/CMakeFiles/rebuild_cache.dir
