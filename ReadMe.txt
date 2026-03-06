@@ -1,3 +1,5 @@
+NOTE: this version of the files is modified to analyze the BEAM-u detector setup.
+
 The files in this folder should be enough to replicate the REPTIle-3 Geant analysis.  
 
 A brief overview:
