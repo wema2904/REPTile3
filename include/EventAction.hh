@@ -19,7 +19,7 @@ class EventAction : public G4UserEventAction
     void resetArrays();
     G4int GetDetNumber(G4String thisDetName);
   public:  
-    static G4String bkSnam[8];
+    static G4String bkSnam[12];
     static G4String bkGnam[7]; 
     static G4String ftSnam[4]; 
     static G4String ftGnam[4]; 
@@ -31,7 +31,7 @@ class EventAction : public G4UserEventAction
     G4ThreeVector PartPos;
     G4ThreeVector PartVelDir;
   private:
-    G4int SiSensID[8];
+    G4int SiSensID[12];
     G4int backSensID[7];        
     G4int backGardID[7];        
     G4int frontSensID[4]; 

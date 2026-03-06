@@ -1,4 +1,4 @@
-# Install script for directory: /home/declan/Geant/Geant/REPTile3
+# Install script for directory: /mnt/c/Documents and Settings/wesle/Documents/LASP research/Scripts/REPTile3Geant
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/declan/Geant/Geant/REPTile3/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/c/Documents and Settings/wesle/Documents/LASP research/Scripts/REPTile3Geant/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

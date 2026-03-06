@@ -34,6 +34,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
         G4double         siliconDepth;
         G4Material*      windowMaterialAl;
         G4Material*      windowMaterialBe;
+        G4Material*      windowMaterialKap;
         G4Material*      windowMaterial;
         G4LogicalVolume* logic_w;
         G4LogicalVolume* logic_alMain;
@@ -100,9 +101,12 @@ class DetectorConstruction : public G4VUserDetectorConstruction
         G4LogicalVolume* logic_d4;
         G4LogicalVolume* logic_d4outer;
         G4LogicalVolume* logic_d5;
-        G4LogicalVolume* logic_d6;
+        G4LogicalVolume* logic_d5outer;
         G4LogicalVolume* logic_d7;
         G4LogicalVolume* logic_d8;
+        // NEW: small end detectors (boresight)
+        G4LogicalVolume* logic_dSmallFront;
+        G4LogicalVolume* logic_dSmallBack;
         G4LogicalVolume* logic_fastener1;
         G4LogicalVolume* logic_fastener2;
         G4LogicalVolume* logic_fastener3;
@@ -168,9 +172,12 @@ class DetectorConstruction : public G4VUserDetectorConstruction
         G4VPhysicalVolume* physi_d4;
         G4VPhysicalVolume* physi_d4outer;
         G4VPhysicalVolume* physi_d5;
-        G4VPhysicalVolume* physi_d6;
+        G4VPhysicalVolume* physi_d5outer;
         G4VPhysicalVolume* physi_d7;
         G4VPhysicalVolume* physi_d8;
+        // NEW: small end detectors (boresight)
+        G4VPhysicalVolume* physi_dSmallFront;
+        G4VPhysicalVolume* physi_dSmallBack;
         G4VPhysicalVolume* physi_fastener1;
         G4VPhysicalVolume* physi_fastener2;
         G4VPhysicalVolume* physi_fastener3;
@@ -243,9 +250,12 @@ class DetectorConstruction : public G4VUserDetectorConstruction
         G4VisAttributes* VisAtt_d4;
         G4VisAttributes* VisAtt_d4Outer;
         G4VisAttributes* VisAtt_d5;
-        G4VisAttributes* VisAtt_d6;
+        G4VisAttributes* VisAtt_d5Outer;
         G4VisAttributes* VisAtt_d7;
         G4VisAttributes* VisAtt_d8;
+        // NEW: small detector visualization
+        G4VisAttributes* VisAtt_dSmallFront;
+        G4VisAttributes* VisAtt_dSmallBack;
         G4VisAttributes* VisAtt_fastener1;
         G4VisAttributes* VisAtt_fastener2;
         G4VisAttributes* VisAtt_fastener3;
@@ -253,7 +263,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 		
         G4SDManager* sdManager;
 public:	 
-     G4VSensitiveDetector* SiSD[8]; 
+     // NEW: expanded for boresight configuration
+    G4VSensitiveDetector* SiSD[12];
     
 };
 

@@ -27,13 +27,25 @@
 #include "CADMesh.hh"
 DetectorConstruction::DetectorConstruction()
  :  //fDetectorMessenger(0),
-    logic_w(0), logic_alMain(0),logic_alCap(0), logic_alShimFront(0),logic_alShimBack(0),logic_frontcoll(0) ,logic_coll(0), logic_coll_embed(0),logic_coll_embed1(0),logic_coll_embed2(0), logic_coll_embed3(0), logic_coll_embed4(0), logic_coll_embed5(0),logic_coll_embed6(0),logic_coll_tooth_W1(0), logic_coll_tooth_W2(0), logic_coll_tooth_W3(0), logic_coll_tooth_W4(0), logic_coll_tooth_W5(0), logic_coll_tooth_W6(0), logic_coll_tooth_W7(0), logic_al_ann1(0), logic_al_chm(0), logic_al_end(0), logic_al_endann(0), logic_be(0),logic_w_ann1(0), logic_w_ann2(0), logic_w_ann_Al1(0), logic_w_ann_Al2(0), logic_w_ann_Al3(0),logic_w_chm(0),logic_w_end(0),logic_w_endenh(0),logic_w_fendenh(0),logic_w_endenh_Al1(0),logic_w_endenh_Al2(0),logic_d1(0), logic_d1outer(0), logic_d2(0), logic_d2outer(0), logic_d3(0), logic_d3outer(0),logic_d4(0),logic_d4outer(0), logic_fastener1(0),logic_fastener2(0),logic_fastener3(0),
-    physi_w(0), physi_alMain(0),physi_alCap(0),physi_alShimBack(0),physi_alShimFront(0), physi_frontcoll(0), physi_coll(0), physi_coll_embed(0),physi_coll_embed1(0), physi_coll_embed2(0), physi_coll_embed3(0), physi_coll_embed4(0), physi_coll_embed5(0),physi_coll_embed6(0),physi_coll_tooth_W1(0), physi_coll_tooth_W2(0), physi_coll_tooth_W3(0), physi_coll_tooth_W4(0),physi_coll_tooth_W5(0), physi_coll_tooth_W6(0), physi_coll_tooth_W7(0), physi_al_ann1(0), physi_al_chm(0), physi_al_end(0), physi_al_endann(0), physi_be(0),physi_w_ann1(0),physi_w_ann2(0), physi_w_chm(0), physi_w_end(0),physi_w_endenh(0),physi_w_fendenh(0),physi_w_endenh_Al1(0),physi_w_endenh_Al2(0), physi_d1(0), physi_d2(0), physi_d3(0), physi_d4(0),physi_d1outer(0), physi_d2outer(0), physi_d3outer(0), physi_d4outer(0),physi_fastener1(0),physi_fastener2(0),physi_fastener3(0)
+    logic_w(0), logic_alMain(0),logic_alCap(0), logic_alShimFront(0),logic_alShimBack(0),logic_frontcoll(0) ,logic_coll(0), 
+    logic_coll_embed(0),logic_coll_embed1(0),logic_coll_embed2(0), logic_coll_embed3(0), logic_coll_embed4(0), logic_coll_embed5(0),logic_coll_embed6(0),
+    logic_coll_tooth_W1(0), logic_coll_tooth_W2(0), logic_coll_tooth_W3(0), logic_coll_tooth_W4(0), logic_coll_tooth_W5(0), logic_coll_tooth_W6(0), logic_coll_tooth_W7(0), 
+    logic_al_ann1(0), logic_al_chm(0), logic_al_end(0), logic_al_endann(0), logic_be(0),logic_w_ann1(0), logic_w_ann2(0), logic_w_ann_Al1(0), logic_w_ann_Al2(0), logic_w_ann_Al3(0),
+    logic_w_chm(0),logic_w_end(0),logic_w_endenh(0),logic_w_fendenh(0),logic_w_endenh_Al1(0),logic_w_endenh_Al2(0),
+    logic_d1(0), logic_d1outer(0), logic_d2(0), logic_d2outer(0), logic_d3(0), logic_d3outer(0),logic_d4(0),logic_d4outer(0), logic_d5(0),logic_d5outer(0), 
+    logic_dSmallFront(0), logic_dSmallBack(0), logic_fastener1(0),logic_fastener2(0),logic_fastener3(0),
+    physi_w(0), physi_alMain(0),physi_alCap(0),physi_alShimBack(0),physi_alShimFront(0), physi_frontcoll(0), physi_coll(0), 
+    physi_coll_embed(0),physi_coll_embed1(0), physi_coll_embed2(0), physi_coll_embed3(0), physi_coll_embed4(0), physi_coll_embed5(0),physi_coll_embed6(0),
+    physi_coll_tooth_W1(0), physi_coll_tooth_W2(0), physi_coll_tooth_W3(0), physi_coll_tooth_W4(0),physi_coll_tooth_W5(0), physi_coll_tooth_W6(0), physi_coll_tooth_W7(0), physi_al_ann1(0), 
+    physi_al_chm(0), physi_al_end(0), physi_al_endann(0), physi_be(0),physi_w_ann1(0),physi_w_ann2(0), physi_w_chm(0), physi_w_end(0),physi_w_endenh(0),physi_w_fendenh(0),physi_w_endenh_Al1(0),physi_w_endenh_Al2(0), 
+    physi_d1(0), physi_d2(0), physi_d3(0), physi_d4(0), physi_d5(0),physi_d1outer(0), physi_d2outer(0), physi_d3outer(0), physi_d4outer(0), physi_d5outer(0), 
+    physi_dSmallFront(0), physi_dSmallBack(0), physi_fastener1(0),physi_fastener2(0),physi_fastener3(0)
 {
 
     //G4cout << "----> DetectorMessenger-Before." << G4endl;          
       fDetectorMessenger = new DetectorMessenger(this);
-      windowDepth    = 0.01 *mm;
+    //   windowDepth    = 0.01 *mm;
+      windowDepth    = 2.0 * micrometer;
       siliconDepth   = 1.5 *mm;
       }
 DetectorConstruction::~DetectorConstruction()
@@ -50,6 +62,19 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	G4double z;  // atomic number
 	G4double density;
 	G4double ncomponents;
+
+    // Elements (for kapton)
+    G4Element* elH = new G4Element("Hydrogen","H", 1., 1.008*g/mole);
+    G4Element* elC = new G4Element("Carbon","C", 6., 12.011*g/mole);
+    G4Element* elN = new G4Element("Nitrogen","N", 7., 14.007*g/mole);
+    G4Element* elO = new G4Element("Oxygen","O", 8., 15.999*g/mole);
+
+    // Kapton material
+    G4Material* Kapton = new G4Material("Kapton", 1.42*g/cm3, 4);
+    Kapton->AddElement(elC, 22);
+    Kapton->AddElement(elH, 10);
+    Kapton->AddElement(elN, 2);
+    Kapton->AddElement(elO, 5);
 
 	// Aluminum
 	G4Material* Al = 
@@ -80,7 +105,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	//Set the window material and depth
 	windowMaterialBe = Be; // this is to ensure the Be and Al properties are the same as what we set and also limit the options we have for window material
 	windowMaterialAl = Al;
-	windowMaterial = windowMaterialBe;
+	windowMaterialKap = Kapton;
+    windowMaterial = windowMaterialKap;
 	
         //Air?
 	//G4double atomicNumber = 7.;
@@ -101,6 +127,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	physi_w = new G4PVPlacement(0,G4ThreeVector(),logic_w,"world",0,false,0);
     
     /* Aluminum Shell */
+    /* -------- OLD SPHERICAL GEOMETRY DISABLED FOR BORESIGHT --------
+   (Al shell, collimator teeth, spacers, tungsten shielding, caps, etc.)
+
     auto mesh_alMain = CADMesh::TessellatedMesh::FromOBJ("./REPTile3AlShell.obj");
     G4VSolid* solid_alMain = mesh_alMain->GetSolid();
     solid_alMain ->SetName("solid_alMain");
@@ -175,26 +204,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4Tubs* solid_coll_s2 = new G4Tubs("coll_s2",coll_s2_ir,coll_s2_or,coll_s2_hd,coll_s2_sta,coll_s2_spa);
     logic_coll_s2 = new G4LogicalVolume(solid_coll_s2,Ta,"coll_s2",0,0,0);
     physi_coll_s2 = new G4PVPlacement(0,G4ThreeVector(coll_s2_x,coll_s2_y,coll_s2_z),logic_coll_s2,"coll_s2",logic_w,false,0);
-                       
-                       
-	
-	// beryllium disc
-	//G4double be_d=0.15*mm; // depth
-	G4double be_d=windowDepth; // depth
-	G4double be_hd=0.5*windowDepth*mm; // half depth
-	G4double be_ir=0.0*mm; // inner radius
-	G4double be_or=15.0*mm; // outer radius
-	G4double be_sta=0.0*deg; // start angle
-	G4double be_spa=360*deg; // span angle
-	G4double be_x=0.0*mm; // x location
-	G4double be_y=0.0*mm; // y locationcoll
-	G4double be_z=-0.5*mm-1.26*mm-0.12*mm+be_hd; // z location
-	G4Tubs* solid_be = new G4Tubs("FOV_disc",be_ir,be_or,0.5*windowDepth,be_sta,be_spa);
-    logic_be = new G4LogicalVolume(solid_be,windowMaterial,"FOV_disc",0,0,0);
-    physi_be = new G4PVPlacement(0,G4ThreeVector(be_x,be_y,be_z),logic_be,"FOV_disc",logic_w,false,0);
-    G4cout << "----> The window's z is " << be_z << G4endl;
-    G4cout << "----> The window's material is " << logic_be->GetMaterial() << G4endl;
-	
+                
 	 // tungsten front annulus 2 (houses: Be window and Ta_tooth)
     G4double w_ann_d2=1.3*mm; // depth
     G4double w_ann_hd2=0.5*w_ann_d2*mm; // half depth
@@ -287,9 +297,59 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     logic_w_endenh = new G4LogicalVolume(solid_w_endenh,W,"W_endenh_plate",0,0,0);
     physi_w_endenh = new G4PVPlacement(0,G4ThreeVector(w_endenh_x,w_endenh_y,w_endenh_z),
                                        logic_w_endenh,"W_endenh_plate",logic_w,false,0);
-    
+    */
+
+	// // beryllium disc
+	// //G4double be_d=0.15*mm; // depth
+	// G4double be_d=windowDepth; // depth
+	// G4double be_hd=0.5*windowDepth*mm; // half depth
+	// G4double be_ir=0.0*mm; // inner radius
+	// G4double be_or=15.0*mm; // outer radius
+	// G4double be_sta=0.0*deg; // start angle
+	// G4double be_spa=360*deg; // span angle
+	// G4double be_x=0.0*mm; // x location
+	// G4double be_y=0.0*mm; // y locationcoll
+	// G4double be_z=-0.5*mm-1.26*mm-0.12*mm+be_hd; // z location
+	// G4Tubs* solid_be = new G4Tubs("FOV_disc",be_ir,be_or,0.5*windowDepth,be_sta,be_spa);
+    // logic_be = new G4LogicalVolume(solid_be,windowMaterial,"FOV_disc",0,0,0);
+    // physi_be = new G4PVPlacement(0,G4ThreeVector(be_x,be_y,be_z),logic_be,"FOV_disc",logic_w,false,0);
+    // G4cout << "----> The window's z is " << be_z << G4endl;
+    // G4cout << "----> The window's material is " << logic_be->GetMaterial() << G4endl;
+	// -------- NEW BORESIGHT WINDOW --------
+    G4double be_d  = windowDepth;
+    G4double be_hd = 0.5 * windowDepth;
+    G4double be_ir = 0.0*mm;
+    G4double be_or = 15.0*mm;
+    G4double be_sta = 0.0*deg;
+    G4double be_spa = 360*deg;
+
+    G4double be_x = 0.0*mm;
+    G4double be_y = 0.0*mm;
+    G4double be_z = -5.0*mm + be_hd;   // NEW: simple upstream position
+
+    G4Tubs* solid_be = new G4Tubs("FOV_disc",
+                                be_ir,
+                                be_or,
+                                be_hd,
+                                be_sta,
+                                be_spa);
+
+    logic_be = new G4LogicalVolume(solid_be,
+                                windowMaterial,
+                                "FOV_disc",
+                                0,0,0);
+
+    physi_be = new G4PVPlacement(0,
+        G4ThreeVector(be_x,be_y,be_z),
+        logic_be,
+        "FOV_disc",
+        logic_w,
+        false,
+        0);
+
+
     //G4cout << "----> Total Length " << frontcoll_d+coll_d+al_ann1_d+w_ann_d+w_chm_d+w_end_d+w_endenh_d << G4endl;
-    // detectors (d)
+    // detectors (d)
     // detector 1 (d1)
 	G4double d1_d = 1.5*mm; // depth
 	G4double d1_hd = 0.5*d1_d*mm; // half depth
@@ -402,7 +462,126 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     logic_d4outer = new G4LogicalVolume(solid_d4outer,Si,"detector_4Outer",0,0,0);
     physi_d4outer = new G4PVPlacement(0,G4ThreeVector(d4outer_x,d4outer_y,d4outer_z),logic_d4outer,"detector_4Outer",logic_w,false,0);
 	
+    // -------- NEW: detector 5 (d5) --------
+    G4double d5_d = 1.5*mm;
+    G4double d5_hd = 0.5*d5_d;
+    G4double d5_ir = 0.0*mm;
+    G4double d5_or = 10.0*mm;
+    G4double d5_sta = 0.0*deg;
+    G4double d5_spa = 360*deg;
+    G4double d5_x = 0.0*mm;
+    G4double d5_y = 0.0*mm;
+    G4double d5_z = 15.92*mm + d5_hd;  // continues 3.98 mm spacing
+
+    G4Tubs* solid_d5 =
+        new G4Tubs("detector_5",
+                d5_ir,
+                d5_or,
+                d5_hd,
+                d5_sta,
+                d5_spa);
+
+    logic_d5 = new G4LogicalVolume(solid_d5,
+                                Si,
+                                "detector_5",
+                                0,0,0);
+
+    physi_d5 = new G4PVPlacement(0,
+        G4ThreeVector(d5_x,d5_y,d5_z),
+        logic_d5,
+        "detector_5",
+        logic_w,
+        false,
+        0);
+    
+    // -------- NEW: detector 5 outer --------
+    G4double d5outer_d  = 1.5*mm;
+    G4double d5outer_hd = 0.5*d5outer_d;
+    G4double d5outer_ir = 10.0*mm;
+    G4double d5outer_or = 20.0*mm;
+    G4double d5outer_sta = 0.0*deg;
+    G4double d5outer_spa = 360*deg;
+    G4double d5outer_x = 0.0*mm;
+    G4double d5outer_y = 0.0*mm;
+    G4double d5outer_z = 15.92*mm + d5_hd;
+
+    G4Tubs* solid_d5outer =
+        new G4Tubs("detector_5Outer",
+                d5outer_ir,d5outer_or,d5outer_hd,
+                d5outer_sta,d5outer_spa);
+
+    logic_d5outer = new G4LogicalVolume(solid_d5outer,
+                                Si,
+                                "detector_5Outer",0,0,0);
+
+    physi_d5outer = new G4PVPlacement(0,
+        G4ThreeVector(d5outer_x,d5outer_y,d5outer_z),
+        logic_d5outer,
+        "detector_5Outer",
+        logic_w,false,0);
+
+    // -------- NEW: small front detector --------
+    G4double ds_d = 0.5*mm;
+    G4double ds_hd = 0.5*ds_d;
+    G4double ds_ir = 0.0*mm;
+    G4double ds_or = 6.0*mm;   // 12 mm diameter
+    G4double ds_sta = 0.0*deg;
+    G4double ds_spa = 360*deg;
+
+    G4double dsf_z = d1_z - d1_hd - ds_hd - 1.5*mm;   // just in front
+
+    G4Tubs* solid_dSmallFront =
+        new G4Tubs("detector_small_front",
+                ds_ir,
+                ds_or,
+                ds_hd,
+                ds_sta,
+                ds_spa);
+
+    logic_dSmallFront =
+        new G4LogicalVolume(solid_dSmallFront,
+                            Si,
+                            "detector_small_front",
+                            0,0,0);
+
+    physi_dSmallFront =
+        new G4PVPlacement(0,
+            G4ThreeVector(0,0,dsf_z),
+            logic_dSmallFront,
+            "detector_small_front",
+            logic_w,
+            false,
+            0);
+
+
+    // -------- NEW: small rear detector --------
+    G4double dsb_z = d5_z + d5_hd + ds_hd + 1.5*mm;
+
+    G4Tubs* solid_dSmallBack =
+        new G4Tubs("detector_small_back",
+                ds_ir,
+                ds_or,
+                ds_hd,
+                ds_sta,
+                ds_spa);
+
+    logic_dSmallBack =
+        new G4LogicalVolume(solid_dSmallBack,
+                            Si,
+                            "detector_small_back",
+                            0,0,0);
+
+    physi_dSmallBack =
+        new G4PVPlacement(0,
+            G4ThreeVector(0,0,dsb_z),
+            logic_dSmallBack,
+            "detector_small_back",
+            logic_w,
+            false,
+            0);
+
 	/* Aluminum Cap */
+    /*
     auto mesh_alCap = CADMesh::TessellatedMesh::FromOBJ("./REPTile2c_AlCap_1023.obj");
     G4VSolid* solid_alCap = mesh_alCap->GetSolid();
     solid_alCap ->SetName("solid_alCap");
@@ -425,23 +604,23 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4Box* solid_constvol = new G4Box("constvol",constvol_xl,constvol_yl,constvol_zl);
     logic_constvol = new G4LogicalVolume(solid_constvol,Vacuum,"logical_constvol",0,0,0);
     physi_constvol = new G4PVPlacement(0,G4ThreeVector(constvol_x,constvol_y,constvol_z),logic_constvol,"physical_constvol",logic_w,false,0);
-	
+	*/
     G4cout << "----> Detector setup done " << G4endl;
     
 
 	//____________________ visible attributes ____________________
 
-	VisAtt_w = new G4VisAttributes(G4Colour(0.0,0.0,0.0));
-	VisAtt_w->SetVisibility(true);
-	logic_w->SetVisAttributes(VisAtt_w);
+	// VisAtt_w = new G4VisAttributes(G4Colour(0.0,0.0,0.0));
+	// VisAtt_w->SetVisibility(true);
+	// logic_w->SetVisAttributes(VisAtt_w);
     
-    VisAtt_alMain = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
-    VisAtt_alMain->SetVisibility(true);
-    logic_alMain->SetVisAttributes(VisAtt_alMain);
+    // VisAtt_alMain = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
+    // VisAtt_alMain->SetVisibility(true);
+    // logic_alMain->SetVisAttributes(VisAtt_alMain);
     
-    VisAtt_alCap = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
-    VisAtt_alCap->SetVisibility(true);
-    logic_alCap->SetVisAttributes(VisAtt_alCap);
+    // VisAtt_alCap = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
+    // VisAtt_alCap->SetVisibility(true);
+    // logic_alCap->SetVisAttributes(VisAtt_alCap);
     
 //    VisAtt_alShimFront = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
 //    VisAtt_alShimFront->SetVisibility(true);
@@ -469,25 +648,25 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     VisAtt_coll->SetVisibility(true);
     logic_coll->SetVisAttributes(VisAtt_coll);
    */ 
-    VisAtt_coll_t1 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
-    VisAtt_coll_t1->SetVisibility(true);
-    logic_coll_t1->SetVisAttributes(VisAtt_coll_t1);
+    // VisAtt_coll_t1 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
+    // VisAtt_coll_t1->SetVisibility(true);
+    // logic_coll_t1->SetVisAttributes(VisAtt_coll_t1);
     
-    VisAtt_coll_t2 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
-    VisAtt_coll_t2->SetVisibility(true);
-    logic_coll_t2->SetVisAttributes(VisAtt_coll_t2);
+    // VisAtt_coll_t2 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
+    // VisAtt_coll_t2->SetVisibility(true);
+    // logic_coll_t2->SetVisAttributes(VisAtt_coll_t2);
     
-    VisAtt_coll_t3 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
-    VisAtt_coll_t3->SetVisibility(true);
-    logic_coll_t3->SetVisAttributes(VisAtt_coll_t3);
+    // VisAtt_coll_t3 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
+    // VisAtt_coll_t3->SetVisibility(true);
+    // logic_coll_t3->SetVisAttributes(VisAtt_coll_t3);
     
-    VisAtt_coll_s1 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
-    VisAtt_coll_s1->SetVisibility(true);
-    logic_coll_s1->SetVisAttributes(VisAtt_coll_s1);
+    // VisAtt_coll_s1 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
+    // VisAtt_coll_s1->SetVisibility(true);
+    // logic_coll_s1->SetVisAttributes(VisAtt_coll_s1);
     
-    VisAtt_coll_s2 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
-    VisAtt_coll_s2->SetVisibility(true);
-    logic_coll_s2->SetVisAttributes(VisAtt_coll_s2);
+    // VisAtt_coll_s2 = new G4VisAttributes(G4Colour(0.0,1.0,1.0));  //W1
+    // VisAtt_coll_s2->SetVisibility(true);
+    // logic_coll_s2->SetVisAttributes(VisAtt_coll_s2);
 
 //    VisAtt_al_ann1 = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
 //    VisAtt_al_ann1->SetVisibility(true);
@@ -517,29 +696,29 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 //    VisAtt_w_ann->SetVisibility(true);
 //    logic_w_ann->SetVisAttributes(VisAtt_w_ann);
 
-    VisAtt_w_ann1 = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
-    VisAtt_w_ann1->SetVisibility(true);
-    logic_w_ann1->SetVisAttributes(VisAtt_w_ann1);
+    // VisAtt_w_ann1 = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
+    // VisAtt_w_ann1->SetVisibility(true);
+    // logic_w_ann1->SetVisAttributes(VisAtt_w_ann1);
     
-    VisAtt_w_ann2 = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
-    VisAtt_w_ann2->SetVisibility(true);
-    logic_w_ann2->SetVisAttributes(VisAtt_w_ann2);
+    // VisAtt_w_ann2 = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
+    // VisAtt_w_ann2->SetVisibility(true);
+    // logic_w_ann2->SetVisAttributes(VisAtt_w_ann2);
     
-    VisAtt_w_chm = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
-    VisAtt_w_chm->SetVisibility(true);
-    logic_w_chm->SetVisAttributes(VisAtt_w_chm);
+    // VisAtt_w_chm = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
+    // VisAtt_w_chm->SetVisibility(true);
+    // logic_w_chm->SetVisAttributes(VisAtt_w_chm);
 
-    VisAtt_w_end = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
-    VisAtt_w_end->SetVisibility(true);
-    logic_w_end->SetVisAttributes(VisAtt_w_end);
+    // VisAtt_w_end = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
+    // VisAtt_w_end->SetVisibility(true);
+    // logic_w_end->SetVisAttributes(VisAtt_w_end);
     
-    VisAtt_w_endenh = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
-    VisAtt_w_endenh->SetVisibility(true);
-    logic_w_endenh->SetVisAttributes(VisAtt_w_endenh);
+    // VisAtt_w_endenh = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
+    // VisAtt_w_endenh->SetVisibility(true);
+    // logic_w_endenh->SetVisAttributes(VisAtt_w_endenh);
     
-    VisAtt_w_fendenh = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
-    VisAtt_w_fendenh->SetVisibility(true);
-    logic_w_fendenh->SetVisAttributes(VisAtt_w_fendenh);
+    // VisAtt_w_fendenh = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
+    // VisAtt_w_fendenh->SetVisibility(true);
+    // logic_w_fendenh->SetVisAttributes(VisAtt_w_fendenh);
     
     VisAtt_d1 = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
     VisAtt_d1->SetVisibility(true);
@@ -572,10 +751,26 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     VisAtt_d4Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
     VisAtt_d4Outer->SetVisibility(true);
     logic_d4outer->SetVisAttributes(VisAtt_d4Outer);
+
+    VisAtt_d5 = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+    VisAtt_d5->SetVisibility(true);
+    logic_d5->SetVisAttributes(VisAtt_d5);
+
+    VisAtt_d5Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+    VisAtt_d5Outer->SetVisibility(true);
+    logic_d5outer->SetVisAttributes(VisAtt_d5Outer);
+
+    VisAtt_dSmallFront = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+    VisAtt_dSmallFront->SetVisibility(true);
+    logic_dSmallFront->SetVisAttributes(VisAtt_dSmallFront);
 	
-    VisAtt_constvol = new G4VisAttributes(G4Colour(1.0,1.0,1.0));
-    VisAtt_constvol->SetVisibility(true);
-    logic_constvol->SetVisAttributes(VisAtt_constvol);
+    VisAtt_dSmallBack = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+    VisAtt_dSmallBack->SetVisibility(true);
+    logic_dSmallBack->SetVisAttributes(VisAtt_dSmallBack);
+
+    // VisAtt_constvol = new G4VisAttributes(G4Colour(1.0,1.0,1.0));
+    // VisAtt_constvol->SetVisibility(true);
+    // logic_constvol->SetVisAttributes(VisAtt_constvol);
 	
     
     G4cout << "----> Visualization setup done " << G4endl;
@@ -586,7 +781,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   //BEGIN OLD CODE FOR 2 SENSITIVE DETECTORS
  //COMMENTED BY DLT ON 3 APRIL 2008
- //G4String SiliconSensDetNames[2] = {"detector1","detector2"};
+ //G4String     DetNames[2] = {"detector1","detector2"};
  //
  // SiSD[0] = new SetSensDet(SiliconSensDetNames[0]);
  // SiSD[1] = new SetSensDet(SiliconSensDetNames[1]);
@@ -598,7 +793,17 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
  //BEGIN NEW CODE FOR 8 SENSITIVE DETECTORS
  //BY DLT 3 APRIL 2008
- G4String SiliconSensDetNames[8] = {"detector_1","detector_1Outer","detector_2","detector_2Outer","detector_3","detector_3Outer","detector_4","detector_4Outer"};
+// -------- NEW: 11 sensitive detectors --------
+G4String SiliconSensDetNames[12] =
+{
+ "detector_1","detector_1Outer",
+ "detector_2","detector_2Outer",
+ "detector_3","detector_3Outer",
+ "detector_4","detector_4Outer",
+ "detector_5","detector_5Outer",
+ "detector_small_front",
+ "detector_small_back"
+};
 
  SiSD[0] = new SetSensDet(SiliconSensDetNames[0]);
  SiSD[1] = new SetSensDet(SiliconSensDetNames[1]);
@@ -608,7 +813,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  SiSD[5] = new SetSensDet(SiliconSensDetNames[5]);
  SiSD[6] = new SetSensDet(SiliconSensDetNames[6]);
  SiSD[7] = new SetSensDet(SiliconSensDetNames[7]);
-
+ SiSD[8]  = new SetSensDet(SiliconSensDetNames[8]);
+ SiSD[9]  = new SetSensDet(SiliconSensDetNames[9]);
+ SiSD[10] = new SetSensDet(SiliconSensDetNames[10]);
+ SiSD[11] = new SetSensDet(SiliconSensDetNames[11]);
 
  sdManager->AddNewDetector(SiSD[0]);
  sdManager->AddNewDetector(SiSD[1]);
@@ -618,7 +826,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  sdManager->AddNewDetector(SiSD[5]);
  sdManager->AddNewDetector(SiSD[6]);
  sdManager->AddNewDetector(SiSD[7]);
-
+ sdManager->AddNewDetector(SiSD[8]);
+ sdManager->AddNewDetector(SiSD[9]);
+ sdManager->AddNewDetector(SiSD[10]);
+ sdManager->AddNewDetector(SiSD[11]);
 
  logic_d1->SetSensitiveDetector(SiSD[0]);
  logic_d1outer->SetSensitiveDetector(SiSD[1]);
@@ -628,8 +839,11 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  logic_d3outer->SetSensitiveDetector(SiSD[5]);
  logic_d4->SetSensitiveDetector(SiSD[6]);
  logic_d4outer->SetSensitiveDetector(SiSD[7]);
- //END NEW CODE FOR 8 DETECTORS
-  
+ logic_d5->SetSensitiveDetector(SiSD[8]);
+ logic_d5outer->SetSensitiveDetector(SiSD[9]);
+ logic_dSmallFront->SetSensitiveDetector(SiSD[10]);
+ logic_dSmallBack->SetSensitiveDetector(SiSD[11]);
+
 
 
 

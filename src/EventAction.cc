@@ -26,7 +26,8 @@
 using G4AnalysisManager = G4CsvAnalysisManager;
 
 G4String  EventAction::bkSnam[]  ={"detector_1","detector_1Outer","detector_2","detector_2Outer",
-                                "detector_3","detector_3Outer","detector_4","detector_4Outer"};
+                                "detector_3","detector_3Outer","detector_4","detector_4Outer",
+                                "detector_5","detector_5Outer","detector_small_front","detector_small_back"};
 
 G4String EventAction::bkGnam[] = {"R3Gard","R4Gard","R5Gard","R6Gard",
                                       "R7Gard","R8Gard","R9Gard"};
@@ -41,12 +42,12 @@ G4String EventAction::shlnam[] = {"outerAlTube","outerAlBackPlate","innerAlfaceP
 	                                  "WcollWasher"};   
 
 G4String EventAction::detName[21]= {"detector_1","detector_1Outer","detector_2","detector_2Outer",
-    "detector_3","detector_3Outer","detector_4","detector_4Outer","Al","W","Be"};
+    "detector_3","detector_3Outer","detector_4","detector_4Outer", "detector_5","detector_5Outer","detector_small_front","detector_small_back", "Al","W","Be"};
 
 G4String EventAction::BeName = "BeFrontDisc";
 //.................................................... 	  
  EventAction::EventAction(){
-   for(int i=0; i<8 ; i++){
+   for(int i=0; i<12 ; i++){
    	         SiSensID[i] = -1;
    }   
        
@@ -62,7 +63,7 @@ G4String EventAction::BeName = "BeFrontDisc";
   G4String collNam = "/SiDiscColl" ;   
 //  G4String collNm1 = "/shieldColl" ;  
   G4String collNm2 = "/BeDiscColl" ;                       	    
-  for(int i=0; i<8; i++){
+  for(int i=0; i<12 ; i++){
     SiSensID[i] = G4SDManager::GetSDMpointer()->GetCollectionID(bkSnam[i]+collNam);
 
   // 	G4cout << " SiSensID[i] " << SiSensID[i] << 
@@ -133,7 +134,7 @@ G4String EventAction::BeName = "BeFrontDisc";
 // k is number of time to  print the output data for each detector
 // i is the detector number. RIC 4.5.08 I think...?
   for(int k=0; k<1 ; k++){
-  for(size_t i=0; i<8 ; i++){
+  for(size_t i=0; i<12 ; i++){
    G4double totE  = 0.;
    G4double totL  = 0.;
    G4int    nStep = 0;
@@ -181,7 +182,11 @@ G4String EventAction::BeName = "BeFrontDisc";
   man->FillNtupleDColumn(6, engyDep[5]);
   man->FillNtupleDColumn(7, engyDep[6]);
   man->FillNtupleDColumn(8, engyDep[7]);
-  man->FillNtupleDColumn(9, PartTheta);
+  man->FillNtupleDColumn(9, engyDep[8]);
+  man->FillNtupleDColumn(10, engyDep[9]);
+  man->FillNtupleDColumn(11, engyDep[10]);
+  man->FillNtupleDColumn(12, engyDep[11]);
+  man->FillNtupleDColumn(13, PartTheta);
   man->AddNtupleRow();
   	f.close();
   } 

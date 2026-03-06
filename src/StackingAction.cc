@@ -32,7 +32,8 @@ G4double StackingAction::eMaxPositron[21] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 
 G4String StackingAction::detName[18] = {
     "detector_1","detector_1Outer","detector_2","detector_2Outer",
-    "detector_3","detector_3Outer","detector_4","detector_4Outer"};
+    "detector_3","detector_3Outer","detector_4","detector_4Outer",
+    "detector_5","detector_5Outer","detector_small_front","detector_small_back"};
 
 //G4String StackingAction::shldAlName[9] = {
 //	          "AlTube","AlBackPlate","AlWasher1","AlWasher2","AlWasher3","AlWasher4",
