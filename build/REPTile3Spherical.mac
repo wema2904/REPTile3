@@ -4,14 +4,14 @@
 /process/activate CoulombScat
 /process/activate eBrem
 
-/control/alias numberofEvent 500000 # will be put in the run
+/control/alias numberofEvent 100 # will be put in the run
 
 ### Particle Types####
 /gps/verbose 0
 
-#/gps/particle proton
+/gps/particle proton
 #/gps/particle e-
-/gps/particle alpha
+#/gps/particle alpha
 /gps/pos/centre 0 0 0 mm
 /gps/pos/type Surface
 /gps/pos/shape Sphere

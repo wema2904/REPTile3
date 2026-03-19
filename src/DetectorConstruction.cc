@@ -23,6 +23,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4UserLimits.hh"
 #include "G4RunManager.hh"
+#include <cfloat>
 // CADMESH //
 #include "CADMesh.hh"
 DetectorConstruction::DetectorConstruction()
@@ -126,6 +127,328 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	logic_w = new G4LogicalVolume(solid_w,Vacuum,"world",0,0,0);
 	physi_w = new G4PVPlacement(0,G4ThreeVector(),logic_w,"world",0,false,0);
     
+    // Constraint volume for spherical cap
+    G4double constvol_zl = 30*mm; // z length
+    G4double constvol_hzl = 0.5*constvol_zl*mm; // half z length
+    G4double constvol_xl = 70.0*mm; // x length
+    G4double constvol_yl = 70.0*mm; // y length
+    G4double constvol_x = 0.0*mm; // x location
+    G4double constvol_y = 0.0*mm; // y location
+    G4double constvol_z = -constvol_zl-3.5*mm; // z location
+    G4Box* solid_constvol = new G4Box("constvol",constvol_xl,constvol_yl,constvol_zl);
+    logic_constvol = new G4LogicalVolume(solid_constvol,Vacuum,"logical_constvol",0,0,0);
+    physi_constvol = new G4PVPlacement(0,G4ThreeVector(constvol_x,constvol_y,constvol_z),logic_constvol,"physical_constvol",logic_w,false,0);
+
+    // ================= NEW: load OBJ geometry =================
+
+    auto mesh_AlShellMain =
+        CADMesh::TessellatedMesh::FromOBJ("412-001_F (Al_Shell_Main).obj");
+
+    auto mesh_WShellMain =
+        CADMesh::TessellatedMesh::FromOBJ("412-003_D (W_Shell_Main).obj");
+
+    auto mesh_WShellCap =
+        CADMesh::TessellatedMesh::FromOBJ("412-004_D (W_Shell_Cap).obj");
+
+    auto mesh_Collimator =
+        CADMesh::TessellatedMesh::FromOBJ("BEAM_u_collimator.obj");
+
+    auto mesh_Adapter =
+        CADMesh::TessellatedMesh::FromOBJ("MEET_Detector_Adapter.obj");
+        
+    auto mesh_Adapter2 =
+        CADMesh::TessellatedMesh::FromOBJ("MEET_Detector_Adapter.obj");
+
+    // ================= NEW: center each mesh using bounding box calculated from tessellated solid =================
+
+    // Al Shell Main
+    G4VSolid* raw_Al = mesh_AlShellMain->GetSolid();
+    G4TessellatedSolid* tess_Al =
+        dynamic_cast<G4TessellatedSolid*>(raw_Al);
+
+    G4ThreeVector vmin_Al(DBL_MAX, DBL_MAX, DBL_MAX);
+    G4ThreeVector vmax_Al(-DBL_MAX, -DBL_MAX, -DBL_MAX);
+
+    for (size_t i = 0; i < tess_Al->GetNumberOfFacets(); i++)
+    {
+        auto facet = tess_Al->GetFacet(i);
+        for (int j = 0; j < facet->GetNumberOfVertices(); j++)
+        {
+            G4ThreeVector v = facet->GetVertex(j);
+
+            vmin_Al.setX(std::min(vmin_Al.x(), v.x()));
+            vmin_Al.setY(std::min(vmin_Al.y(), v.y()));
+            vmin_Al.setZ(std::min(vmin_Al.z(), v.z()));
+
+            vmax_Al.setX(std::max(vmax_Al.x(), v.x()));
+            vmax_Al.setY(std::max(vmax_Al.y(), v.y()));
+            vmax_Al.setZ(std::max(vmax_Al.z(), v.z()));
+        }
+    }
+
+    G4ThreeVector center_Al = 0.5 * (vmin_Al + vmax_Al);
+
+    G4VSolid* solid_AlShellMain =
+        new G4DisplacedSolid("AlShellMain_shifted",
+                            raw_Al,
+                            0,
+                            -center_Al);
+
+
+    // W Shell Main
+    G4VSolid* raw_WMain = mesh_WShellMain->GetSolid();
+    G4TessellatedSolid* tess_WMain =
+        dynamic_cast<G4TessellatedSolid*>(raw_WMain);
+
+    G4ThreeVector vmin_WMain(DBL_MAX, DBL_MAX, DBL_MAX);
+    G4ThreeVector vmax_WMain(-DBL_MAX, -DBL_MAX, -DBL_MAX);
+
+    for (size_t i = 0; i < tess_WMain->GetNumberOfFacets(); i++)
+    {
+        auto facet = tess_WMain->GetFacet(i);
+        for (int j = 0; j < facet->GetNumberOfVertices(); j++)
+        {
+            G4ThreeVector v = facet->GetVertex(j);
+
+            vmin_WMain.setX(std::min(vmin_WMain.x(), v.x()));
+            vmin_WMain.setY(std::min(vmin_WMain.y(), v.y()));
+            vmin_WMain.setZ(std::min(vmin_WMain.z(), v.z()));
+
+            vmax_WMain.setX(std::max(vmax_WMain.x(), v.x()));
+            vmax_WMain.setY(std::max(vmax_WMain.y(), v.y()));
+            vmax_WMain.setZ(std::max(vmax_WMain.z(), v.z()));
+        }
+    }
+
+    G4ThreeVector center_WMain = 0.5 * (vmin_WMain + vmax_WMain);
+
+    G4VSolid* solid_WShellMain =
+        new G4DisplacedSolid("WShellMain_shifted",
+                            raw_WMain,
+                            0,
+                            -center_WMain);
+
+
+    // W Shell Cap
+    G4VSolid* raw_WCap = mesh_WShellCap->GetSolid();
+    G4TessellatedSolid* tess_WCap =
+        dynamic_cast<G4TessellatedSolid*>(raw_WCap);
+
+    G4ThreeVector vmin_WCap(DBL_MAX, DBL_MAX, DBL_MAX);
+    G4ThreeVector vmax_WCap(-DBL_MAX, -DBL_MAX, -DBL_MAX);
+
+    for (size_t i = 0; i < tess_WCap->GetNumberOfFacets(); i++)
+    {
+        auto facet = tess_WCap->GetFacet(i);
+        for (int j = 0; j < facet->GetNumberOfVertices(); j++)
+        {
+            G4ThreeVector v = facet->GetVertex(j);
+
+            vmin_WCap.setX(std::min(vmin_WCap.x(), v.x()));
+            vmin_WCap.setY(std::min(vmin_WCap.y(), v.y()));
+            vmin_WCap.setZ(std::min(vmin_WCap.z(), v.z()));
+
+            vmax_WCap.setX(std::max(vmax_WCap.x(), v.x()));
+            vmax_WCap.setY(std::max(vmax_WCap.y(), v.y()));
+            vmax_WCap.setZ(std::max(vmax_WCap.z(), v.z()));
+        }
+    }
+
+    G4ThreeVector center_WCap = 0.5 * (vmin_WCap + vmax_WCap);
+
+    G4VSolid* solid_WShellCap =
+        new G4DisplacedSolid("WShellCap_shifted",
+                            raw_WCap,
+                            0,
+                            -center_WCap);
+
+
+    // Collimator
+    G4VSolid* raw_Coll = mesh_Collimator->GetSolid();
+    G4TessellatedSolid* tess_Coll =
+        dynamic_cast<G4TessellatedSolid*>(raw_Coll);
+
+    G4ThreeVector vmin_Coll(DBL_MAX, DBL_MAX, DBL_MAX);
+    G4ThreeVector vmax_Coll(-DBL_MAX, -DBL_MAX, -DBL_MAX);
+
+    for (size_t i = 0; i < tess_Coll->GetNumberOfFacets(); i++)
+    {
+        auto facet = tess_Coll->GetFacet(i);
+        for (int j = 0; j < facet->GetNumberOfVertices(); j++)
+        {
+            G4ThreeVector v = facet->GetVertex(j);
+
+            vmin_Coll.setX(std::min(vmin_Coll.x(), v.x()));
+            vmin_Coll.setY(std::min(vmin_Coll.y(), v.y()));
+            vmin_Coll.setZ(std::min(vmin_Coll.z(), v.z()));
+
+            vmax_Coll.setX(std::max(vmax_Coll.x(), v.x()));
+            vmax_Coll.setY(std::max(vmax_Coll.y(), v.y()));
+            vmax_Coll.setZ(std::max(vmax_Coll.z(), v.z()));
+        }
+    }
+
+    G4ThreeVector center_Coll = 0.5 * (vmin_Coll + vmax_Coll);
+
+    G4VSolid* solid_Collimator =
+        new G4DisplacedSolid("Collimator_shifted",
+                            raw_Coll,
+                            0,
+                            -center_Coll);
+
+
+    // Adapters
+    G4VSolid* raw_Adapter = mesh_Adapter->GetSolid();
+    G4TessellatedSolid* tess_Adapter =
+        dynamic_cast<G4TessellatedSolid*>(raw_Adapter);
+
+    G4ThreeVector vmin_Adapter(DBL_MAX, DBL_MAX, DBL_MAX);
+    G4ThreeVector vmax_Adapter(-DBL_MAX, -DBL_MAX, -DBL_MAX);
+
+    for (size_t i = 0; i < tess_Adapter->GetNumberOfFacets(); i++)
+    {
+        auto facet = tess_Adapter->GetFacet(i);
+        for (int j = 0; j < facet->GetNumberOfVertices(); j++)
+        {
+            G4ThreeVector v = facet->GetVertex(j);
+
+            vmin_Adapter.setX(std::min(vmin_Adapter.x(), v.x()));
+            vmin_Adapter.setY(std::min(vmin_Adapter.y(), v.y()));
+            vmin_Adapter.setZ(std::min(vmin_Adapter.z(), v.z()));
+
+            vmax_Adapter.setX(std::max(vmax_Adapter.x(), v.x()));
+            vmax_Adapter.setY(std::max(vmax_Adapter.y(), v.y()));
+            vmax_Adapter.setZ(std::max(vmax_Adapter.z(), v.z()));
+        }
+    }
+
+    G4ThreeVector center_Adapter = 0.5 * (vmin_Adapter + vmax_Adapter);
+
+    G4VSolid* solid_Adapter =
+        new G4DisplacedSolid("Adapter_shifted",
+                            raw_Adapter,
+                            0,
+                            -center_Adapter);
+
+                            
+    G4VSolid* raw_Adapter2 = mesh_Adapter2->GetSolid();
+    G4TessellatedSolid* tess_Adapter2 =
+        dynamic_cast<G4TessellatedSolid*>(raw_Adapter2);
+
+    G4ThreeVector vmin_Adapter2(DBL_MAX, DBL_MAX, DBL_MAX);
+    G4ThreeVector vmax_Adapter2(-DBL_MAX, -DBL_MAX, -DBL_MAX);
+
+    for (size_t i = 0; i < tess_Adapter2->GetNumberOfFacets(); i++)
+    {
+        auto facet = tess_Adapter2->GetFacet(i);
+        for (int j = 0; j < facet->GetNumberOfVertices(); j++)
+        {
+            G4ThreeVector v = facet->GetVertex(j);
+
+            vmin_Adapter2.setX(std::min(vmin_Adapter2.x(), v.x()));
+            vmin_Adapter2.setY(std::min(vmin_Adapter2.y(), v.y()));
+            vmin_Adapter2.setZ(std::min(vmin_Adapter2.z(), v.z()));
+
+            vmax_Adapter2.setX(std::max(vmax_Adapter2.x(), v.x()));
+            vmax_Adapter2.setY(std::max(vmax_Adapter2.y(), v.y()));
+            vmax_Adapter2.setZ(std::max(vmax_Adapter2.z(), v.z()));
+        }
+    }
+
+    G4ThreeVector center_Adapter2 = 0.5 * (vmin_Adapter2 + vmax_Adapter2);
+
+    G4VSolid* solid_Adapter2 =
+        new G4DisplacedSolid("Adapter_shifted",
+                            raw_Adapter2,
+                            0,
+                            -center_Adapter2);
+
+    // ================= NEW: logical volumes =================
+
+    G4LogicalVolume* logic_AlShellMain =
+        new G4LogicalVolume(solid_AlShellMain, Al, "AlShellMain");
+
+    G4LogicalVolume* logic_WShellMain =
+        new G4LogicalVolume(solid_WShellMain, W, "WShellMain");
+
+    G4LogicalVolume* logic_WShellCap =
+        new G4LogicalVolume(solid_WShellCap, W, "WShellCap");
+
+    G4LogicalVolume* logic_Collimator =
+        new G4LogicalVolume(solid_Collimator, W, "Collimator");
+
+    G4LogicalVolume* logic_Adapter =
+        new G4LogicalVolume(solid_Adapter, Al, "Adapter");
+
+    G4LogicalVolume* logic_Adapter2 =
+        new G4LogicalVolume(solid_Adapter2, Al, "Adapter2");
+
+    // ================= NEW: placement =================
+
+    // identity rotation
+    G4RotationMatrix* rot0 = new G4RotationMatrix();
+
+    // adjust these offsets manually
+    G4RotationMatrix* rm_adapter = new G4RotationMatrix();
+    rm_adapter->rotateX(90.*deg);
+    G4RotationMatrix* rm_adapter2 = new G4RotationMatrix();
+    rm_adapter2->rotateX(-90.*deg);
+    G4double spacing = 20.0*mm;
+    // G4ThreeVector pos_AlShellMain = G4ThreeVector(0,0, 3*spacing);
+    // G4ThreeVector pos_WShellMain  = G4ThreeVector(0,0, 2*spacing);
+    // G4ThreeVector pos_Collimator  = G4ThreeVector(0,0, 1*spacing);
+    // G4ThreeVector pos_Adapter     = G4ThreeVector(0,0,-3*spacing);
+    // G4ThreeVector pos_WShellCap   = G4ThreeVector(0,0, -2*spacing);
+    G4double z_window = -5.0*mm + 0.5 * windowDepth;
+    G4double hz_Coll = 0.5 * (vmax_Coll.z() - vmin_Coll.z());
+    G4double z_Collimator = z_window - hz_Coll;
+    
+    G4double hz_Adapter = 0.5 * (vmax_Adapter.y() - vmin_Adapter.y());
+    G4double z_Adapter = z_window + hz_Adapter;
+
+    G4double hz_WMain = 0.5 * (vmax_WMain.z() - vmin_WMain.z());
+    G4double z_WShellMain = z_window + hz_WMain - 3.5*mm; 
+
+    G4double hz_Al = 0.5 * (vmax_Al.z() - vmin_Al.z());
+    G4double z_AlShellMain = z_window + hz_Al - 16.54*mm;
+
+    G4double hz_WCap = 0.5 * (vmax_WCap.z() - vmin_WCap.z());
+    G4double z_WShellCap = z_window + 27.85*mm + hz_WCap;
+
+    G4double hz_Adapter2 = 0.5 * (vmax_Adapter2.y() - vmin_Adapter2.y());
+    G4double z_Adapter2 = z_WShellCap - hz_WCap - hz_Adapter2;
+
+    G4ThreeVector pos_AlShellMain = G4ThreeVector(0,0,z_AlShellMain);
+    G4ThreeVector pos_WShellMain  = G4ThreeVector(0,0,z_WShellMain);
+    G4ThreeVector pos_WShellCap   = G4ThreeVector(0,0,z_WShellCap);
+    G4ThreeVector pos_Collimator  = G4ThreeVector(0,0,z_Collimator);
+    G4ThreeVector pos_Adapter     = G4ThreeVector(0,0,z_Adapter);
+    G4ThreeVector pos_Adapter2    = G4ThreeVector(0,0,z_Adapter2);
+
+    new G4PVPlacement(rot0, pos_AlShellMain,
+        logic_AlShellMain, "AlShellMain",
+        logic_w, false, 0);
+
+    new G4PVPlacement(rot0, pos_WShellMain,
+        logic_WShellMain, "WShellMain",
+        logic_w, false, 0);
+
+    new G4PVPlacement(rot0, pos_WShellCap,
+        logic_WShellCap, "WShellCap",
+        logic_w, false, 0);
+
+    new G4PVPlacement(rot0, pos_Collimator,
+        logic_Collimator, "Collimator",
+        logic_w, false, 0);
+
+    new G4PVPlacement(rm_adapter, pos_Adapter,
+        logic_Adapter, "Adapter",
+        logic_w, false, 0);
+
+    new G4PVPlacement(rm_adapter2, pos_Adapter2,
+        logic_Adapter2, "Adapter2",
+        logic_w, false, 0);
+
     /* Aluminum Shell */
     /* -------- OLD SPHERICAL GEOMETRY DISABLED FOR BORESIGHT --------
    (Al shell, collimator teeth, spacers, tungsten shielding, caps, etc.)
@@ -387,7 +710,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4double d2_spa = 360*deg; // span angle
     G4double d2_x=0.0*mm; // x location
     G4double d2_y=0.0*mm; // y location
-    G4double d2_z=3.98*mm + d2_hd; // z location
+    G4double d2_z=3.94*mm + d2_hd; // z location
     G4Tubs* solid_d2 = new G4Tubs("detector_2",d2_ir,d2_or,d2_hd,d2_sta,d2_spa);
     logic_d2 = new G4LogicalVolume(solid_d2,Si,"detector_2",0,0,0);
     physi_d2 = new G4PVPlacement(0,G4ThreeVector(d2_x,d2_y,d2_z),logic_d2,"detector_2",logic_w,false,0);
@@ -401,7 +724,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4double d2outer_spa = 360*deg; // span angle
     G4double d2outer_x = 0.0*mm; // x location
     G4double d2outer_y = 0.0*mm; // y location
-    G4double d2outer_z = 3.98*mm + d2_hd; // z location
+    G4double d2outer_z = 3.94*mm + d2_hd; // z location
     G4Tubs* solid_d2outer = new G4Tubs("detector_2Outer",d2outer_ir,d2outer_or,d2outer_hd,d2outer_sta,d2outer_spa);
     logic_d2outer = new G4LogicalVolume(solid_d2outer,Si,"detector_2Outer",0,0,0);
     physi_d2outer = new G4PVPlacement(0,G4ThreeVector(d2outer_x,d2outer_y,d2outer_z),logic_d2outer,"detector_2Outer",logic_w,false,0);
@@ -415,7 +738,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	G4double d3_spa = 360*deg; // span angle
 	G4double d3_x=0.0*mm; // x location
 	G4double d3_y=0.0*mm; // y location
-	G4double d3_z=7.96*mm + d3_hd; // z location
+	G4double d3_z=3.94*mm * 2 + d3_hd; // z location
 	G4Tubs* solid_d3 = new G4Tubs("detector_3",d3_ir,d3_or,d3_hd,d3_sta,d3_spa);
 	logic_d3 = new G4LogicalVolume(solid_d3,Si,"detector_3",0,0,0);
 	physi_d3 = new G4PVPlacement(0,G4ThreeVector(d3_x,d3_y,d3_z),logic_d3,"detector_3",logic_w,false,0);
@@ -429,7 +752,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4double d3outer_spa = 360*deg; // span angle
     G4double d3outer_x = 0.0*mm; // x location
     G4double d3outer_y = 0.0*mm; // y location
-    G4double d3outer_z = 7.96*mm + d3_hd; // z location
+    G4double d3outer_z = 3.94*mm * 2 + d3_hd; // z location
     G4Tubs* solid_d3outer = new G4Tubs("detector_3Outer",d3outer_ir,d3outer_or,d3outer_hd,d3outer_sta,d3outer_spa);
     logic_d3outer = new G4LogicalVolume(solid_d3outer,Si,"detector_3Outer",0,0,0);
     physi_d3outer = new G4PVPlacement(0,G4ThreeVector(d3outer_x,d3outer_y,d3outer_z),logic_d3outer,"detector_3Outer",logic_w,false,0);
@@ -443,7 +766,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	G4double d4_spa = 360*deg; // span angle
 	G4double d4_x=0.0*mm; // x location
 	G4double d4_y=0.0*mm; // y location
-	G4double d4_z=11.94*mm + d4_hd; // z location
+	G4double d4_z=3.94*mm * 3 + d4_hd; // z location
 	G4Tubs* solid_d4 = new G4Tubs("detector_4",d4_ir,d4_or,d4_hd,d4_sta,d4_spa);
 	logic_d4 = new G4LogicalVolume(solid_d4,Si,"detector_4",0,0,0);
 	physi_d4 = new G4PVPlacement(0,G4ThreeVector(d4_x,d4_y,d4_z),logic_d4,"detector_4",logic_w,false,0);
@@ -457,7 +780,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4double d4outer_spa = 360*deg; // span angle
     G4double d4outer_x = 0.0*mm; // x location
     G4double d4outer_y = 0.0*mm; // y location
-    G4double d4outer_z = 11.94*mm + d4_hd; // z location
+    G4double d4outer_z = 3.94*mm * 3 + d4_hd; // z location
     G4Tubs* solid_d4outer = new G4Tubs("detector_4Outer",d4outer_ir,d4outer_or,d4outer_hd,d4outer_sta,d4outer_spa);
     logic_d4outer = new G4LogicalVolume(solid_d4outer,Si,"detector_4Outer",0,0,0);
     physi_d4outer = new G4PVPlacement(0,G4ThreeVector(d4outer_x,d4outer_y,d4outer_z),logic_d4outer,"detector_4Outer",logic_w,false,0);
@@ -471,7 +794,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4double d5_spa = 360*deg;
     G4double d5_x = 0.0*mm;
     G4double d5_y = 0.0*mm;
-    G4double d5_z = 15.92*mm + d5_hd;  // continues 3.98 mm spacing
+    G4double d5_z = 3.94*mm * 4 + d5_hd;  // continues 3.94 mm spacing
 
     G4Tubs* solid_d5 =
         new G4Tubs("detector_5",
@@ -503,7 +826,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4double d5outer_spa = 360*deg;
     G4double d5outer_x = 0.0*mm;
     G4double d5outer_y = 0.0*mm;
-    G4double d5outer_z = 15.92*mm + d5_hd;
+    G4double d5outer_z = 3.94*mm * 4 + d5_hd;
 
     G4Tubs* solid_d5outer =
         new G4Tubs("detector_5Outer",
@@ -528,7 +851,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4double ds_sta = 0.0*deg;
     G4double ds_spa = 360*deg;
 
-    G4double dsf_z = d1_z - d1_hd - ds_hd - 1.5*mm;   // just in front
+    G4double dsf_z = d1_z - d1_hd - ds_hd - 3.5*mm;   // just in front
 
     G4Tubs* solid_dSmallFront =
         new G4Tubs("detector_small_front",
@@ -555,7 +878,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
 
     // -------- NEW: small rear detector --------
-    G4double dsb_z = d5_z + d5_hd + ds_hd + 1.5*mm;
+    G4double dsb_z = d5_z + d5_hd + ds_hd + 3.5*mm;
 
     G4Tubs* solid_dSmallBack =
         new G4Tubs("detector_small_back",
@@ -580,7 +903,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
             false,
             0);
 
-	/* Aluminum Cap */
+            /* Aluminum Cap */
     /*
     auto mesh_alCap = CADMesh::TessellatedMesh::FromOBJ("./REPTile2c_AlCap_1023.obj");
     G4VSolid* solid_alCap = mesh_alCap->GetSolid();
@@ -592,27 +915,15 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	
     physi_alCap = new G4PVPlacement(0, G4ThreeVector(x_alCap, y_alCap, z_alCap), logic_alCap, "physical_alCap", logic_w, false,0);
 	
-	
-	// Constraint volume for spherical cap
-    G4double constvol_zl = 30*mm; // z length
-    G4double constvol_hzl = 0.5*constvol_zl*mm; // half z length
-    G4double constvol_xl = 70.0*mm; // x length
-    G4double constvol_yl = 70.0*mm; // y length
-    G4double constvol_x = 0.0*mm; // x location
-    G4double constvol_y = 0.0*mm; // y location
-    G4double constvol_z = -constvol_zl-16.2*mm; // z location
-    G4Box* solid_constvol = new G4Box("constvol",constvol_xl,constvol_yl,constvol_zl);
-    logic_constvol = new G4LogicalVolume(solid_constvol,Vacuum,"logical_constvol",0,0,0);
-    physi_constvol = new G4PVPlacement(0,G4ThreeVector(constvol_x,constvol_y,constvol_z),logic_constvol,"physical_constvol",logic_w,false,0);
 	*/
     G4cout << "----> Detector setup done " << G4endl;
     
 
 	//____________________ visible attributes ____________________
 
-	// VisAtt_w = new G4VisAttributes(G4Colour(0.0,0.0,0.0));
-	// VisAtt_w->SetVisibility(true);
-	// logic_w->SetVisAttributes(VisAtt_w);
+	VisAtt_w = new G4VisAttributes(G4Colour(0.0,0.0,0.0));
+	VisAtt_w->SetVisibility(true);
+	logic_w->SetVisAttributes(VisAtt_w);
     
     // VisAtt_alMain = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
     // VisAtt_alMain->SetVisibility(true);
@@ -688,7 +999,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 //    VisAtt_al_endann->SetVisibility(true);
 //    logic_al_endann->SetVisAttributes(VisAtt_al_endann);
 
-    VisAtt_be = new G4VisAttributes(G4Colour(0.0,0.0,1.0));
+    VisAtt_be = new G4VisAttributes(G4Colour(0.0,1.0,1.0,0.75));
     VisAtt_be->SetVisibility(true);
     logic_be->SetVisAttributes(VisAtt_be);
 	
@@ -720,59 +1031,92 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // VisAtt_w_fendenh->SetVisibility(true);
     // logic_w_fendenh->SetVisAttributes(VisAtt_w_fendenh);
     
-    VisAtt_d1 = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+    VisAtt_d1 = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.35));
     VisAtt_d1->SetVisibility(true);
     logic_d1->SetVisAttributes(VisAtt_d1);
-    
-    VisAtt_d1Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+
+    VisAtt_d1Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.1));
     VisAtt_d1Outer->SetVisibility(true);
     logic_d1outer->SetVisAttributes(VisAtt_d1Outer);
-    
-	VisAtt_d2 = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+
+    VisAtt_d2 = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.35));
     VisAtt_d2->SetVisibility(true);
     logic_d2->SetVisAttributes(VisAtt_d2);
-    
-    VisAtt_d2Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+
+    VisAtt_d2Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.1));
     VisAtt_d2Outer->SetVisibility(true);
     logic_d2outer->SetVisAttributes(VisAtt_d2Outer);
 
-	VisAtt_d3 = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+    VisAtt_d3 = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.35));
     VisAtt_d3->SetVisibility(true);
     logic_d3->SetVisAttributes(VisAtt_d3);
-    
-    VisAtt_d3Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+
+    VisAtt_d3Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.1));
     VisAtt_d3Outer->SetVisibility(true);
     logic_d3outer->SetVisAttributes(VisAtt_d3Outer);
-    
-	VisAtt_d4 = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+
+    VisAtt_d4 = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.35));
     VisAtt_d4->SetVisibility(true);
     logic_d4->SetVisAttributes(VisAtt_d4);
 
-    VisAtt_d4Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+    VisAtt_d4Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.1));
     VisAtt_d4Outer->SetVisibility(true);
     logic_d4outer->SetVisAttributes(VisAtt_d4Outer);
 
-    VisAtt_d5 = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+    VisAtt_d5 = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.35));
     VisAtt_d5->SetVisibility(true);
     logic_d5->SetVisAttributes(VisAtt_d5);
 
-    VisAtt_d5Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+    VisAtt_d5Outer = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.1));
     VisAtt_d5Outer->SetVisibility(true);
     logic_d5outer->SetVisAttributes(VisAtt_d5Outer);
 
-    VisAtt_dSmallFront = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+    VisAtt_dSmallFront = new G4VisAttributes(G4Colour(1.0,0.65,0.0,0.75));
     VisAtt_dSmallFront->SetVisibility(true);
     logic_dSmallFront->SetVisAttributes(VisAtt_dSmallFront);
-	
-    VisAtt_dSmallBack = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+
+    VisAtt_dSmallBack = new G4VisAttributes(G4Colour(1.0,0.65,0.0,0.75));
     VisAtt_dSmallBack->SetVisibility(true);
     logic_dSmallBack->SetVisAttributes(VisAtt_dSmallBack);
 
-    // VisAtt_constvol = new G4VisAttributes(G4Colour(1.0,1.0,1.0));
-    // VisAtt_constvol->SetVisibility(true);
-    // logic_constvol->SetVisAttributes(VisAtt_constvol);
+    VisAtt_constvol = new G4VisAttributes(G4Colour(1.0,1.0,1.0,0.1));
+    VisAtt_constvol->SetVisibility(true);
+    logic_constvol->SetVisAttributes(VisAtt_constvol);
 	
-    
+    // ================= NEW: visualization =================
+
+    G4VisAttributes* Vis_AlShellMain =
+        new G4VisAttributes(G4Colour(0.7,0.7,0.7,0.1));  // aluminum gray
+
+    G4VisAttributes* Vis_WShellMain =
+        new G4VisAttributes(G4Colour(0.3,0.3,0.3,0.1));  // tungsten dark
+
+    G4VisAttributes* Vis_WShellCap =
+        new G4VisAttributes(G4Colour(0.3,0.3,0.3,0.1));
+
+    G4VisAttributes* Vis_Collimator =
+        new G4VisAttributes(G4Colour(1.0,0.0,1.0,0.2));  // magnenta
+
+    G4VisAttributes* Vis_Adapter =
+        new G4VisAttributes(G4Colour(0.647, 0.165, 0.165,0.2));  // brown
+
+    G4VisAttributes* Vis_Adapter2 =
+        new G4VisAttributes(G4Colour(0.647, 0.165, 0.165,0.2));  // brown
+
+    Vis_AlShellMain->SetVisibility(true);
+    Vis_WShellMain->SetVisibility(true);
+    Vis_WShellCap->SetVisibility(true);
+    Vis_Collimator->SetVisibility(true);
+    Vis_Adapter->SetVisibility(true);
+    Vis_Adapter2->SetVisibility(true);
+
+    logic_AlShellMain->SetVisAttributes(Vis_AlShellMain);
+    logic_WShellMain->SetVisAttributes(Vis_WShellMain);
+    logic_WShellCap->SetVisAttributes(Vis_WShellCap);
+    logic_Collimator->SetVisAttributes(Vis_Collimator);
+    logic_Adapter->SetVisAttributes(Vis_Adapter);
+    logic_Adapter2->SetVisAttributes(Vis_Adapter2);
+
     G4cout << "----> Visualization setup done " << G4endl;
 
    // designate as sensitive detectors 

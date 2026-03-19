@@ -4,7 +4,7 @@
 /process/activate CoulombScat
 /process/activate eBrem
 
-/control/alias numberofEvent 100000 # will be put in the run beam
+/control/alias numberofEvent 100 # will be put in the run beam
 
 ### Particle Types####
 /gps/verbose 0
