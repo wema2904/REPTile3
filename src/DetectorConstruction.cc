@@ -134,7 +134,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4double constvol_yl = 70.0*mm; // y length
     G4double constvol_x = 0.0*mm; // x location
     G4double constvol_y = 0.0*mm; // y location
-    G4double constvol_z = -constvol_zl-3.5*mm; // z location
+    G4double constvol_z = -constvol_zl-23*mm; // z location
     G4Box* solid_constvol = new G4Box("constvol",constvol_xl,constvol_yl,constvol_zl);
     logic_constvol = new G4LogicalVolume(solid_constvol,Vacuum,"logical_constvol",0,0,0);
     physi_constvol = new G4PVPlacement(0,G4ThreeVector(constvol_x,constvol_y,constvol_z),logic_constvol,"physical_constvol",logic_w,false,0);
